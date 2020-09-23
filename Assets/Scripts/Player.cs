@@ -10,7 +10,8 @@ public class Player : MonoBehaviour
     [SerializeField] float jumpForce = 5f;
     [SerializeField] SpriteRenderer sprite;
     [SerializeField] GameObject groundChecker;
-    [SerializeField, Range(0.1f,1f)] float boxSide = 0.81f;
+    [SerializeField, Range(0.1f,1f)] float boxSide = 0.84f;
+    bool onGround;
     float xVelocity;
     Rigidbody2D body;
     Vector2 playerVelocity;
@@ -21,12 +22,18 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             xVelocity = -1;
-            sprite.flipX = true;
+            if (onGround)
+            {
+                sprite.flipX = true;
+            }
         }
         else if (Input.GetKey(KeyCode.D))
         {
             xVelocity = 1;
-            sprite.flipX = false;
+            if (onGround)
+            {
+                sprite.flipX = false;
+            }
         }
         else xVelocity = 0;
 
@@ -40,32 +47,30 @@ public class Player : MonoBehaviour
             playerVelocity.x = -maxMovementSpeed;
         }
 
-        animator.SetBool("isRunning", playerVelocity.x != 0);
-        animator.SetBool("isStoping", xVelocity * playerVelocity.x < 0);
-
         if(xVelocity == 0)
         {
             playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, 0, movementDecrease * Time.deltaTime);
         }
 
         playerVelocity.y = body.velocity.y;
-        if (Input.GetKeyDown(KeyCode.Space))
+        onGround = Physics2D.OverlapBox(groundChecker.transform.position, new Vector2(boxSide, Mathf.Epsilon), 0f, LayerMask.GetMask("Ground"));
+
+        if (onGround & Input.GetKeyDown(KeyCode.Space))
         {
             playerVelocity.y = jumpForce;
-            Debug.Log("Spase pressed " + playerVelocity);
         }
-        bool a = Physics2D.OverlapBox(groundChecker.transform.position, new Vector2(boxSide, boxSide), LayerMask.GetMask("Ground"));
-        bool b = Physics2D.OverlapCircle(groundChecker.transform.position, 1f, LayerMask.GetMask("Ground"));
-        Debug.Log("box collision is " + a);
-        Debug.Log("circle collision is "+b);
 
         body.velocity = playerVelocity;
+
+        animator.SetBool("isRunning", playerVelocity.x != 0 & onGround);
+        animator.SetBool("isStoping", xVelocity * playerVelocity.x < 0);
+        animator.SetBool("isJumping", !onGround);
 
     }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(groundChecker.transform.position, new Vector3(boxSide, boxSide, 0f));
+        Gizmos.DrawWireCube(groundChecker.transform.position, new Vector3(boxSide, Mathf.Epsilon, 0f));
     }
     private void Start()
     {

@@ -152,12 +152,12 @@ PrefabInstance:
     - target: {fileID: 3844921908557798374, guid: 5730e6958d2f1fa48b5f6f7c691cdf1e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.48
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3844921908557798374, guid: 5730e6958d2f1fa48b5f6f7c691cdf1e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.82
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3844921908557798374, guid: 5730e6958d2f1fa48b5f6f7c691cdf1e,
         type: 3}
@@ -431,7 +431,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 672741615}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: -0.033, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 721853407}
@@ -601,9 +601,10 @@ MonoBehaviour:
   maxMovementSpeed: 20
   movementIncrease: 30
   movementDecrease: 30
-  jumpForce: 70
+  jumpForce: 10
   sprite: {fileID: 375411710}
   groundChecker: {fileID: 672741615}
+  boxSide: 0.84
 --- !u!1001 &785875433
 PrefabInstance:
   m_ObjectHideFlags: 0
