@@ -10,12 +10,13 @@ public class Player : MonoBehaviour
     [SerializeField] float jumpForce = 5f;
     [SerializeField] SpriteRenderer sprite;
     [SerializeField] GameObject groundChecker;
+    [SerializeField, Range(0.1f,1f)] float boxSide = 0.81f;
     float xVelocity;
     Rigidbody2D body;
     Vector2 playerVelocity;
     Animator animator;
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (Input.GetKey(KeyCode.A))
         {
@@ -53,46 +54,23 @@ public class Player : MonoBehaviour
             playerVelocity.y = jumpForce;
             Debug.Log("Spase pressed " + playerVelocity);
         }
-        bool a = Physics2D.OverlapCircle(groundChecker.transform.position, 0.5f, LayerMask.GetMask("Ground"));
-        Debug.Log(a);
+        bool a = Physics2D.OverlapBox(groundChecker.transform.position, new Vector2(boxSide, boxSide), LayerMask.GetMask("Ground"));
+        bool b = Physics2D.OverlapCircle(groundChecker.transform.position, 1f, LayerMask.GetMask("Ground"));
+        Debug.Log("box collision is " + a);
+        Debug.Log("circle collision is "+b);
+
         body.velocity = playerVelocity;
 
     }
-
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(groundChecker.transform.position, new Vector3(boxSide, boxSide, 0f));
+    }
     private void Start()
     {
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
-    // Update is called once per frame
-    void Update()
-    {
-        //Run();
-        //ChangeSpriteDirection();
-        //Jump();
-    }
 
-    //private void Run()
-    //{
-    //    xVelocity = Input.GetAxis("Horizontal") * movementSpeed * Time.deltaTime;
-    //    GetComponent<Rigidbody2D>().velocity = new Vector2(xVelocity, 0f);
-    //    GetComponent<Animator>().SetBool("isRunning", xVelocity != 0);
-    //}
-
-    private void ChangeSpriteDirection()
-    {
-        GetComponent<Transform>().localScale = new Vector3
-            (Mathf.Sign(xVelocity), transform.localScale.y);
-    }
-
-    private void Jump()
-    {
-        //if (Input.GetButtonDown("Jump"))
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("press Jump");
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0f, jumpForce * Time.deltaTime);
-        }
-
-    }
 }
