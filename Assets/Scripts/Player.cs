@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float maxMovementSpeed = 100f;
-    [SerializeField] float movementIncrease = 10f;
-    [SerializeField] float movementDecrease = 10f;
-    [SerializeField] float jumpForce = 5f;
+    [SerializeField] float maxMovementSpeed = 5f;
+    [SerializeField] float movementIncrease = 5f;
+    [SerializeField] float movementDecrease = 8f;
+    [SerializeField] float jumpForce = 20f;
     [SerializeField] SpriteRenderer sprite;
     [SerializeField] GameObject groundChecker;
     [SerializeField, Range(0.1f,1f)] float boxSide = 0.84f;
