@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float maxMovementSpeedInPeace = 5f;
-    [SerializeField] float movementIncrease = 5f;
-    [SerializeField] float movementDecrease = 18f;
-    [SerializeField] float jumpForce = 20f;
-    [SerializeField] SpriteRenderer sprite;
-    [SerializeField] GameObject groundChecker;
-    [SerializeField, Range(0.1f,1f)] float boxSide = 0.84f;
-    float maxMovementSpeed;
-    bool onGround;
-    float xVelocity;
-    Rigidbody2D body;
-    Vector2 playerVelocity;
-    Animator animator;
+    [SerializeField] private float maxMovementSpeedInPeace = 5f;
+    [SerializeField] private float movementIncrease = 5f;
+    [SerializeField] private float movementDecrease = 18f;
+    [SerializeField] private float maxJumpForce = 14f;
+    [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private float addJumpForce = 1f; 
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private GameObject groundChecker;
+    [SerializeField, Range(0.1f,1f)] private float boxSide = 0.84f;
+    private float maxMovementSpeed;
+    private bool justJump = false;
+    private bool onGround;
+    private float xVelocity;
+    private Rigidbody2D body;
+    private Vector2 playerVelocity;
+    private Animator animator;
 
     private void Update()
     {
@@ -64,6 +67,18 @@ public class Player : MonoBehaviour
         if (onGround & Input.GetKeyDown(KeyCode.Space))
         {
             playerVelocity.y = jumpForce;
+            justJump = true;
+        }
+
+        if (Input.GetKey(KeyCode.Space) & justJump & playerVelocity.y >= 0)
+        {
+            Debug.Log("Space pressed");
+            playerVelocity.y += addJumpForce ;
+            if(playerVelocity.y >= maxJumpForce)
+            {
+                justJump = false ;
+            }
+            Debug.Log(playerVelocity.y);
         }
 
         body.velocity = playerVelocity;
@@ -72,10 +87,6 @@ public class Player : MonoBehaviour
         animator.SetBool("isStoping", xVelocity * playerVelocity.x < 0);
         animator.SetBool("isJumping", !onGround);
 
-        // delete
-        Debug.Log(maxMovementSpeed);
-        Debug.Log(playerVelocity.x);
-        // delete
     }
     private void OnDrawGizmosSelected()
     {
