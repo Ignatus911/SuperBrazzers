@@ -7,9 +7,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxMovementSpeedInPeace = 5f;
     [SerializeField] private float movementIncrease = 5f;
     [SerializeField] private float movementDecrease = 18f;
-    [SerializeField] private float maxJumpForce = 14f;
-    [SerializeField] private float jumpForce = 5f;
-    [SerializeField] private float addJumpForce = 1f; 
+    [SerializeField] private float maxJumpForce = 15.3f;
+    [SerializeField] private float jumpForce = 6f;
+    [SerializeField] private float addJumpForce = 100f; 
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private GameObject groundChecker;
     [SerializeField, Range(0.1f,1f)] private float boxSide = 0.84f;
@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D body;
     private Vector2 playerVelocity;
     private Animator animator;
+
 
     private void Update()
     {
@@ -41,7 +42,7 @@ public class Player : MonoBehaviour
         }
         else xVelocity = 0;
 
-        playerVelocity.x += xVelocity * movementIncrease * Time.fixedDeltaTime;
+        playerVelocity.x += xVelocity * movementIncrease * Time.deltaTime;
         if (Input.GetKey(KeyCode.LeftShift))
         {
             maxMovementSpeed = maxMovementSpeedInPeace * 2;
@@ -56,7 +57,7 @@ public class Player : MonoBehaviour
             playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, -maxMovementSpeed, 0.7f * movementDecrease * Time.deltaTime );
         }
 
-        if(xVelocity == 0 | xVelocity * playerVelocity.x < 0)
+        if(xVelocity == 0 || xVelocity * playerVelocity.x < 0)
         {
             playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, 0, movementDecrease * Time.deltaTime);
         }
@@ -73,12 +74,11 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) & justJump & playerVelocity.y >= 0)
         {
             Debug.Log("Space pressed");
-            playerVelocity.y += addJumpForce ;
+            playerVelocity.y += addJumpForce * Time.deltaTime ;
             if(playerVelocity.y >= maxJumpForce)
             {
                 justJump = false ;
             }
-            Debug.Log(playerVelocity.y);
         }
 
         body.velocity = playerVelocity;
