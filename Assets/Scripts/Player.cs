@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float maxMovementSpeed = 5f;
+    [SerializeField] float maxMovementSpeedInPeace = 5f;
     [SerializeField] float movementIncrease = 5f;
-    [SerializeField] float movementDecrease = 8f;
+    [SerializeField] float movementDecrease = 18f;
     [SerializeField] float jumpForce = 20f;
     [SerializeField] SpriteRenderer sprite;
     [SerializeField] GameObject groundChecker;
     [SerializeField, Range(0.1f,1f)] float boxSide = 0.84f;
+    float maxMovementSpeed;
     bool onGround;
     float xVelocity;
     Rigidbody2D body;
@@ -38,16 +39,21 @@ public class Player : MonoBehaviour
         else xVelocity = 0;
 
         playerVelocity.x += xVelocity * movementIncrease * Time.fixedDeltaTime;
-        if(playerVelocity.x > maxMovementSpeed)
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            playerVelocity.x = maxMovementSpeed;
+            maxMovementSpeed = maxMovementSpeedInPeace * 2;
+        }
+        else  maxMovementSpeed = maxMovementSpeedInPeace;
+        if (playerVelocity.x > maxMovementSpeed)
+        {
+            playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, maxMovementSpeed, 0.7f * movementDecrease * Time.deltaTime) ;
         }
         else if(playerVelocity.x < -maxMovementSpeed)
         {
-            playerVelocity.x = -maxMovementSpeed;
+            playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, -maxMovementSpeed, 0.7f * movementDecrease * Time.deltaTime );
         }
 
-        if(xVelocity == 0)
+        if(xVelocity == 0 | xVelocity * playerVelocity.x < 0)
         {
             playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, 0, movementDecrease * Time.deltaTime);
         }
@@ -66,6 +72,10 @@ public class Player : MonoBehaviour
         animator.SetBool("isStoping", xVelocity * playerVelocity.x < 0);
         animator.SetBool("isJumping", !onGround);
 
+        // delete
+        Debug.Log(maxMovementSpeed);
+        Debug.Log(playerVelocity.x);
+        // delete
     }
     private void OnDrawGizmosSelected()
     {
