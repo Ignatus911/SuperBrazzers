@@ -127,6 +127,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4002093136083415159}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &362638650 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2145254246, guid: 18ee01a77a156514d920146b81b8ae77,
+    type: 3}
+  m_PrefabInstance: {fileID: 1058085135365931329}
+  m_PrefabAsset: {fileID: 0}
+--- !u!68 &362638652
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362638650}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 6534180174fe96647883239994e7805e, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.5, y: 0}
+  - {x: 0.5, y: 0}
 --- !u!1001 &364749891
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1490,6 +1514,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 216318780, guid: 18ee01a77a156514d920146b81b8ae77, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 6b483edca7886634987f3ad72e38aae9, type: 2}
     - target: {fileID: 1058085135296971384, guid: 18ee01a77a156514d920146b81b8ae77,
         type: 3}
       propertyPath: m_Name

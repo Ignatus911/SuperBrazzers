@@ -81,6 +81,11 @@ public class Player : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            justJump = false;
+        }
+
         body.velocity = playerVelocity;
 
         animator.SetBool("isRunning", playerVelocity.x != 0 & onGround);
