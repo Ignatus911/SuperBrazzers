@@ -15,23 +15,29 @@ public class Enemy : MonoBehaviour
     [SerializeField] private SpriteRenderer sprite;
     private float direction = -1f;
     private float distantion;
+    private bool isWaiting = true;
+    private bool isAlive = true;
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         player = FindObjectOfType<Player>().GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-
+        distantion = player.position.x - body.position.x;
     }
 
     // Update is called once per frame
     void Update()
     {
-        distantion = player.position.x - body.position.x;
-        Debug.Log(distantion);
-        Debug.Log("player.position.x = " + player.position.x);
-        Debug.Log("body.position.x = " + body.position.x);
-        if (Mathf.Abs(distantion) <= distantionForAction)
+        if (isWaiting)
+        {
+            distantion = player.position.x - body.position.x;
+            if (Mathf.Abs(distantion) <= distantionForAction)
+                isWaiting = false;
+        }
+
+        else
+        if (isAlive)
         {
             body.velocity = new Vector2(speed, 0f) * direction * Time.deltaTime;
             if (Physics2D.OverlapCircle(collisionsChecker.transform.position, 0.01f, LayerMask.GetMask("Environment")))
@@ -49,11 +55,16 @@ public class Enemy : MonoBehaviour
 
             }
 
-            if (Physics2D.OverlapBox(deathCollider.transform.position, new Vector2(0f, deathColliderSize), 0f, LayerMask.GetMask("Player")))
+            var collisionWithPlayer = Physics2D.OverlapBox(deathCollider.transform.position, new Vector2(0f, deathColliderSize), 0f, LayerMask.GetMask("Player"));
+            if (collisionWithPlayer)
             {
-                speed = 0f;
                 animator.SetBool("isDead", true);
+                body.isKinematic = true;
+                GetComponent<EdgeCollider2D>().enabled = false;
+                Destroy(deathCollider);
                 Destroy(gameObject, 0.5f);
+                collisionWithPlayer.GetComponent<Player>().BounceOnEnemy();
+                isAlive = false;
             }
         }
     } 

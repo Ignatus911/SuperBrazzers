@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,15 +8,23 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxMovementSpeedInPeace = 5f;
     [SerializeField] private float movementIncrease = 5f;
     [SerializeField] private float movementDecrease = 18f;
+    [SerializeField] private float changeDirectionDecrease = 18f;
+    [SerializeField] private float brakingDecreaseToWalk = 13f;
     [SerializeField] private float maxJumpForce = 15.3f;
     [SerializeField] private float jumpForce = 6f;
+    [SerializeField] private float jumpFromEnemy = 15f;
     [SerializeField] private float addJumpForce = 100f; 
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private GameObject groundChecker;
-    [SerializeField, Range(0.1f,1f)] private float boxSide = 0.84f;
+    [SerializeField] private GameObject upHitChecker;
+    [SerializeField, Range(0.1f,1f)] private float groundCheckerSize = 0.84f;
+    [SerializeField, Range(0.1f,1f)] private float upperCheckerSize = 0.84f;
+    private int enemiesLayer = 10;
     private float maxMovementSpeed;
+    private bool isAlive = true;
     private bool justJump = false;
     private bool onGround;
+    private bool hitOnJump;
     private float xVelocity;
     private Rigidbody2D body;
     private Vector2 playerVelocity;
@@ -24,80 +33,95 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.A))
-        {
-            xVelocity = -1;
-            if (onGround)
+        if (isAlive)
+        { 
+            if (Input.GetKey(KeyCode.A))
+                xVelocity = -1;
+            else
             {
-                sprite.flipX = true;
+                if (Input.GetKey(KeyCode.D))
+                    xVelocity = 1;
+                else
+                    xVelocity = 0;
             }
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            xVelocity = 1;
-            if (onGround)
+
+            if (onGround && Mathf.Abs(xVelocity) > 0)
+            sprite.flipX = xVelocity < 0;
+
+            playerVelocity.x += xVelocity * movementIncrease * Time.deltaTime;
+
+            if (Input.GetKey(KeyCode.LeftShift))
+                maxMovementSpeed = maxMovementSpeedInPeace * 2;
+            else
+                maxMovementSpeed = maxMovementSpeedInPeace;
+
+            if (Mathf.Abs(playerVelocity.x) > Mathf.Abs(maxMovementSpeed))
+                playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, maxMovementSpeed, brakingDecreaseToWalk * Time.deltaTime);
+
+            if (xVelocity == 0)
+                playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, 0, movementDecrease * Time.deltaTime);
+            else
             {
-                sprite.flipX = false;
+                if (xVelocity * playerVelocity.x < 0)
+                    playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, 0, changeDirectionDecrease * Time.deltaTime);
             }
-        }
-        else xVelocity = 0;
 
-        playerVelocity.x += xVelocity * movementIncrease * Time.deltaTime;
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            maxMovementSpeed = maxMovementSpeedInPeace * 2;
-        }
-        else  maxMovementSpeed = maxMovementSpeedInPeace;
-        if (playerVelocity.x > maxMovementSpeed)
-        {
-            playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, maxMovementSpeed, 0.7f * movementDecrease * Time.deltaTime) ;
-        }
-        else if(playerVelocity.x < -maxMovementSpeed)
-        {
-            playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, -maxMovementSpeed, 0.7f * movementDecrease * Time.deltaTime );
-        }
+            playerVelocity.y = body.velocity.y;
 
-        if(xVelocity == 0 || xVelocity * playerVelocity.x < 0)
-        {
-            playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, 0, movementDecrease * Time.deltaTime);
-        }
+            onGround = Physics2D.OverlapBox(groundChecker.transform.position, new Vector2(groundCheckerSize, Mathf.Epsilon), 0f, LayerMask.GetMask("Ground", "Environment"));
+            hitOnJump = Physics2D.OverlapBox(upHitChecker.transform.position, new Vector2(upperCheckerSize, Mathf.Epsilon), 0f, LayerMask.GetMask("Environment"));
 
-        playerVelocity.y = body.velocity.y;
-        onGround = Physics2D.OverlapBox(groundChecker.transform.position, new Vector2(boxSide, Mathf.Epsilon), 0f, LayerMask.GetMask("Ground"));
-
-        if (onGround & Input.GetKeyDown(KeyCode.Space))
-        {
-            playerVelocity.y = jumpForce;
-            justJump = true;
-        }
-
-        if (Input.GetKey(KeyCode.Space) & justJump & playerVelocity.y >= 0)
-        {
-            Debug.Log("Space pressed");
-            playerVelocity.y += addJumpForce * Time.deltaTime ;
-            if(playerVelocity.y >= maxJumpForce)
+            if (onGround & Input.GetKeyDown(KeyCode.Space))
             {
-                justJump = false ;
+                playerVelocity.y = jumpForce;
+                justJump = true;
             }
+
+            if (Input.GetKey(KeyCode.Space) && justJump)
+            {
+                Debug.Log("Space pressed");
+                playerVelocity.y += addJumpForce * Time.deltaTime;
+                if (playerVelocity.y >= maxJumpForce || hitOnJump)
+                    justJump = false;
+            }
+
+            if (Input.GetKeyUp(KeyCode.Space))
+                justJump = false;
+
+            body.velocity = playerVelocity;
+
+            animator.SetBool("isRunning", playerVelocity.x != 0 & onGround);
+            animator.SetBool("isStoping", xVelocity * playerVelocity.x < 0);
+            animator.SetBool("isJumping", !onGround);
         }
+    }
 
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            justJump = false;
-        }
+    public void BounceOnEnemy()
+    {
+        body.velocity = new Vector2(0f, jumpFromEnemy);
+    }
 
-        body.velocity = playerVelocity;
-
-        animator.SetBool("isRunning", playerVelocity.x != 0 & onGround);
-        animator.SetBool("isStoping", xVelocity * playerVelocity.x < 0);
-        animator.SetBool("isJumping", !onGround);
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.layer == enemiesLayer)
+            PlayerDeath();
 
     }
+
+    private void PlayerDeath()
+    {
+        isAlive = false;
+        animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+        animator.SetBool("isDead", true);
+        Time.timeScale = 0;
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(groundChecker.transform.position, new Vector3(boxSide, Mathf.Epsilon, 0f));
+        Gizmos.DrawWireCube(groundChecker.transform.position, new Vector3(groundCheckerSize, Mathf.Epsilon, 0f));
     }
+
     private void Start()
     {
         body = GetComponent<Rigidbody2D>();

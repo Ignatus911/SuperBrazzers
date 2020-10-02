@@ -97,8 +97,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 384981179
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 1534823120340418987, guid: c875ddaf8874e3441911dfeb6fee79a8,
     type: 3}
@@ -208,10 +208,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distantionForAction: 14
-  speed: 400
+  speed: 160
   collisionsChecker: {fileID: 1058085135791472812}
   deathCollider: {fileID: 2145254246}
-  deathColliderSize: 0.8
+  deathColliderSize: 0.9
   sprite: {fileID: 1058085135107774684}
 --- !u!95 &216318782
 Animator:
