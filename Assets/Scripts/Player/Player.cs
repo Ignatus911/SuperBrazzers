@@ -60,15 +60,11 @@ public class Player : MonoBehaviour
             if (xVelocity == 0)
             {
                 playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, 0, movementDecrease * Time.deltaTime);
-                Debug.LogError("1");
             }
             else
             {
                 if (xVelocity * playerVelocity.x < 0)
-                {
                     playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, 0, changeDirectionDecrease * Time.deltaTime);
-                    Debug.LogError("2");
-                }
             }
 
             playerVelocity.y = body.velocity.y;
