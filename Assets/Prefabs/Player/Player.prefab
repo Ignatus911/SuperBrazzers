@@ -211,7 +211,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 588320805
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 1065497980754006195, guid: 15a9400903732fb46ad7e5af15a04291,
     type: 3}
@@ -236,9 +236,10 @@ GameObject:
   - component: {fileID: 3844921908557798374}
   - component: {fileID: 3844921908557798375}
   - component: {fileID: 721853408}
-  - component: {fileID: 721853410}
   - component: {fileID: 721853409}
   - component: {fileID: 439654405}
+  - component: {fileID: 1921091371923260214}
+  - component: {fileID: 5278284309573154519}
   m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
@@ -309,32 +310,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.83574533, y: 0.95082676}
   m_EdgeRadius: 0
---- !u!114 &721853410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3844921908557798372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53cc0a41f9a9e3f4386adcdaae980cec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxMovementSpeedInPeace: 5
-  movementIncrease: 8
-  movementDecrease: 18
-  changeDirectionDecrease: 18
-  brakingDecreaseToWalk: 13
-  maxJumpForce: 15.3
-  jumpForce: 6
-  jumpFromEnemy: 15
-  addJumpForce: 100
-  sprite: {fileID: 3844921907839630921}
-  groundChecker: {fileID: 672741615}
-  upHitChecker: {fileID: 1695396875}
-  groundCheckerSize: 0.84
-  upperCheckerSize: 0.7
 --- !u!50 &721853409
 Rigidbody2D:
   serializedVersion: 4
@@ -372,3 +347,28 @@ CircleCollider2D:
   m_Offset: {x: -0.03, y: -0.6}
   serializedVersion: 2
   m_Radius: 0.41
+--- !u!114 &1921091371923260214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3844921908557798372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51b28e4e5e9126e4b84de8c6e5dbfd66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 3844921907839630921}
+--- !u!114 &5278284309573154519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3844921908557798372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b70906636e0b1e45a0384e37b2b83d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
