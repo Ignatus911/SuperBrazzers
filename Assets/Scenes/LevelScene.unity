@@ -389,6 +389,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 721853409, guid: 5730e6958d2f1fa48b5f6f7c691cdf1e, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 6b483edca7886634987f3ad72e38aae9, type: 2}
     - target: {fileID: 3844921908557798372, guid: 5730e6958d2f1fa48b5f6f7c691cdf1e,
         type: 3}
       propertyPath: m_Name
@@ -2969,6 +2973,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gumba (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1058085135296971384, guid: 18ee01a77a156514d920146b81b8ae77,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1058085135296971386, guid: 18ee01a77a156514d920146b81b8ae77,
         type: 3}
       propertyPath: speed
@@ -5040,6 +5049,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gumba
+      objectReference: {fileID: 0}
+    - target: {fileID: 1058085135296971384, guid: 18ee01a77a156514d920146b81b8ae77,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1058085135296971387, guid: 18ee01a77a156514d920146b81b8ae77,
         type: 3}

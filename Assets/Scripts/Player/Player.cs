@@ -27,14 +27,13 @@ public class Player : MonoBehaviour
     private bool hitOnJump;
     private float xVelocity;
     private Rigidbody2D body;
-    private Vector2 playerVelocity;
     private Animator animator;
-
 
     private void Update()
     {
         if (isAlive)
-        { 
+        {
+            var playerVelocity = body.velocity;
             if (Input.GetKey(KeyCode.A))
                 xVelocity = -1;
             else
@@ -46,7 +45,7 @@ public class Player : MonoBehaviour
             }
 
             if (onGround && Mathf.Abs(xVelocity) > 0)
-            sprite.flipX = xVelocity < 0;
+                sprite.flipX = xVelocity < 0;
 
             playerVelocity.x += xVelocity * movementIncrease * Time.deltaTime;
 
@@ -59,11 +58,17 @@ public class Player : MonoBehaviour
                 playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, maxMovementSpeed, brakingDecreaseToWalk * Time.deltaTime);
 
             if (xVelocity == 0)
+            {
                 playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, 0, movementDecrease * Time.deltaTime);
+                Debug.LogError("1");
+            }
             else
             {
                 if (xVelocity * playerVelocity.x < 0)
+                {
                     playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, 0, changeDirectionDecrease * Time.deltaTime);
+                    Debug.LogError("2");
+                }
             }
 
             playerVelocity.y = body.velocity.y;
@@ -71,7 +76,7 @@ public class Player : MonoBehaviour
             onGround = Physics2D.OverlapBox(groundChecker.transform.position, new Vector2(groundCheckerSize, Mathf.Epsilon), 0f, LayerMask.GetMask("Ground", "Environment"));
             hitOnJump = Physics2D.OverlapBox(upHitChecker.transform.position, new Vector2(upperCheckerSize, Mathf.Epsilon), 0f, LayerMask.GetMask("Environment"));
 
-            if (onGround & Input.GetKeyDown(KeyCode.Space))
+            if (onGround && Input.GetKeyDown(KeyCode.Space))
             {
                 playerVelocity.y = jumpForce;
                 justJump = true;
@@ -90,7 +95,7 @@ public class Player : MonoBehaviour
 
             body.velocity = playerVelocity;
 
-            animator.SetBool("isRunning", playerVelocity.x != 0 & onGround);
+            animator.SetBool("isRunning", playerVelocity.x != 0 && onGround);
             animator.SetBool("isStoping", xVelocity * playerVelocity.x < 0);
             animator.SetBool("isJumping", !onGround);
         }
