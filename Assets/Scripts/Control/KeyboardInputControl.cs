@@ -13,6 +13,7 @@ public class KeyboardInputControl : InputControl
             else
                 CurrentDirection = ControlDirection.NoInput;
         }
-
+        IsShiftPressed = Input.GetKey(KeyCode.LeftShift);
+        IsSpacePressed = Input.GetKey(KeyCode.Space);
     }
 }

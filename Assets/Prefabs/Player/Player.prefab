@@ -239,7 +239,10 @@ GameObject:
   - component: {fileID: 721853409}
   - component: {fileID: 439654405}
   - component: {fileID: 1921091371923260214}
+  - component: {fileID: 1224101798}
   - component: {fileID: 5278284309573154519}
+  - component: {fileID: 3986871713939785255}
+  - component: {fileID: 1224101799}
   m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
@@ -326,7 +329,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 6
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6b483edca7886634987f3ad72e38aae9, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -359,7 +362,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b28e4e5e9126e4b84de8c6e5dbfd66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 5278284309573154519}
   sprite: {fileID: 3844921907839630921}
+--- !u!114 &1224101798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3844921908557798372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28162fc22c77e1a4aa3b03c20030b5f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementAspect: {fileID: 3986871713939785255}
+  playerJumpAspect: {fileID: 1224101799}
+  animationSpeedCorrector: 10
 --- !u!114 &5278284309573154519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,3 +391,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b70906636e0b1e45a0384e37b2b83d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3986871713939785255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3844921908557798372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac3c69fd3962264c82a000fb2393a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 5278284309573154519}
+  maxSpeed: 6
+  shiftMaxSpeed: 10
+  xIncreaseValue: 5
+  shiftXIncreaseValue: 10
+  xDecreaseValue: 30
+  changeDirectionValue: 30
+  shiftChangeDirectionValue: 30
+--- !u!114 &1224101799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3844921908557798372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e507cd4b05a704e8f9742850f3918c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 5278284309573154519}
+  groundCheker:
+    CheckerSize: 0.8
+    Mask:
+      serializedVersion: 2
+      m_Bits: 768
+    Checker: {fileID: 672741616}
+  headCheker:
+    CheckerSize: 0.7
+    Mask:
+      serializedVersion: 2
+      m_Bits: 768
+    Checker: {fileID: 1695396876}
+  ySpeed: 10
+  jumpTime: 0.3
