@@ -22,8 +22,4 @@ public class AIController : MonoBehaviour
     }
 }
 
-public enum AILogic
-{
-    Moving,
-    Jumping
-}
+

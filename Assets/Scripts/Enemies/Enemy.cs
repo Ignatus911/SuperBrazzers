@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private Rigidbody2D player;
+    private Rigidbody2D player; 
     private Rigidbody2D body;
     private Animator animator;
     [SerializeField] private float distantionForAction = 14f;

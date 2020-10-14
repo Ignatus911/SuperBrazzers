@@ -6,6 +6,7 @@ public class PlayerAnimationAspect : MonoBehaviour
 
     [SerializeField] private PlayerMovementAspect movementAspect;
     [SerializeField] private PlayerJumpAspect playerJumpAspect;
+    [SerializeField] private PlayerStatusController playerStatusController;
     [SerializeField] private float animationSpeedCorrector = 1;
 
     private bool IsRunning
@@ -24,6 +25,16 @@ public class PlayerAnimationAspect : MonoBehaviour
         selfAnimator.SetBool("isRunning", IsRunning && playerJumpAspect.IsGrounded);
         selfAnimator.SetBool("isStoping", movementAspect.IsStopping);
         selfAnimator.SetBool("isJumping", !playerJumpAspect.IsGrounded);
+    }
+
+    public void BecomeBig()
+    {
+        selfAnimator.SetTrigger("becomeBig");
+    }
+
+    public void BecomeSmall()
+    {
+        selfAnimator.SetTrigger("becomeSmall");
     }
 
     private float GetAnimationSpeed()

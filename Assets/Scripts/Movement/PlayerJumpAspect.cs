@@ -7,10 +7,10 @@ public class PlayerJumpAspect : MonoBehaviour
     [SerializeField] private InputControl input;
     [SerializeField] private JumpChecker groundCheker;
     [SerializeField] private JumpChecker headCheker;
-    [SerializeField] private float ySpeed = 1;
+    [SerializeField] private float ySpeed = 2;
 
     [SerializeField]
-    private float jumpTime = 0.3f;
+    private float jumpTime = 0.35f;
     private float currentJumpTime;
 
     public bool IsGrounded { get; private set; }
