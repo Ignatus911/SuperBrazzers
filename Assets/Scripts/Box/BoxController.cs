@@ -6,7 +6,7 @@ public class BoxController : MonoBehaviour
 {
     [SerializeField] private BoxLogic logic;
     [SerializeField] private GameObject checker;
-    [SerializeField] private float checkerSize = 1f;
+    [SerializeField] private float checkerSize = 0.8f;
     [SerializeField] private BoxDestroy boxDestroy;
     [SerializeField] private BoxJump boxJump;
     [SerializeField] private PlayerStatusController playerStatus;
