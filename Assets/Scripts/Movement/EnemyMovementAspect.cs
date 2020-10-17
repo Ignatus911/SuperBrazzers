@@ -13,7 +13,7 @@ public class EnemyMovementAspect : MonoBehaviour
 
     public void Move(float speed)
     {
-        body.velocity = new Vector2(speed * (directionAspect.IsLookRight ? 1 : -1) * Time.deltaTime, body.velocity.y);
+        body.velocity = new Vector2(speed * (directionAspect.IsLookRight ? 1 : -1), body.velocity.y);
     }
 
     public void Jump(float speed)

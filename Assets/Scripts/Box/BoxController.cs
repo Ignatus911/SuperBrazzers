@@ -1,55 +1,55 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
-public class BoxController : MonoBehaviour
+public class BoxController : MonoBehaviour, IHeadHitting
 {
     [SerializeField] private BoxType boxType;
-    [SerializeField] private GameObject checker;
-    [SerializeField] private float checkerSize = 0.8f;
     [SerializeField] private BoxDestroy boxDestroy;
     [SerializeField] private BoxJump boxJump;
-    [SerializeField] private PlayerStatusController playerStatus;
+    [SerializeField] private BoxSpawnObject _boxObject;
+    [SerializeField] private LayerMask playerMask;
     private BoxState currentState;
-    private bool wait;
+    private bool freeze;
 
-    // Update is called once per frame
-    void Update()
+    public void Hit(GameObject hitter)
     {
-        var HitByPlayer = Physics2D.OverlapBox(checker.transform.position, new Vector2(checkerSize, Mathf.Epsilon), 0f, LayerMask.GetMask("Player"));
-        if (HitByPlayer && !wait)
+        if (freeze)
+            return;
+        var playerStatus = hitter.GetComponent<PlayerStatusController>();
+        if (playerStatus == null)
+            return;
+        switch (boxType)
         {
-            switch (boxType)
-            {
-                case BoxType.SimpleBrick:
-                    if (playerStatus.IsBig)
+            case BoxType.SimpleBrick:
+                switch (playerStatus.Status)
+                {
+                    case PlayerStatus.Small:
+                        currentState = boxJump;
+                        break;
+                    case PlayerStatus.Super:
+                    case PlayerStatus.Big:
                         currentState = boxDestroy;
-                    else currentState = boxJump;
-                    break;
+                        break;
+                }
+                break;
 
-                case BoxType.BoxWithCoins:
-                    currentState = boxJump;
-                    break;
-
-                case BoxType.BoxWithFlower:
-                    currentState = boxJump;
-                    break;
-
-                case BoxType.BoxWithMushroom:
-                    currentState = boxJump;
-                    break;
-            }
-            currentState.DoLogic();
-            wait = true;
-            StartCoroutine(DontReact());
+            case BoxType.BoxWithBonus:
+                currentState = _boxObject;
+                break;
         }
+        currentState.DoLogic();
+        freeze = true;
+        StartCoroutine(DontReact());
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
     }
 
     IEnumerator DontReact()
     {
         yield return new WaitForSeconds(0.3f);
-        wait = false;
+        freeze = false;
     }
-
 }

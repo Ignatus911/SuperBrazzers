@@ -25,14 +25,21 @@ public class PlayerJumpAspect : MonoBehaviour
     private void Update()
     {
         IsGrounded = Physics2D.OverlapBox(groundCheker.Checker.transform.position, new Vector2(groundCheker.CheckerSize, Mathf.Epsilon), 0f, groundCheker.Mask);
-        var isHitHead = Physics2D.OverlapBox(headCheker.Checker.transform.position, new Vector2(headCheker.CheckerSize, Mathf.Epsilon), 0f, headCheker.Mask);
+        var headCollisionTarget = Physics2D.OverlapBox(headCheker.Checker.transform.position, new Vector2(headCheker.CheckerSize, Mathf.Epsilon), 0f, headCheker.Mask);
         if (IsGrounded && !input.IsSpacePressed)
         {
             isAbleJump = true;
             currentJumpTime = jumpTime;
         }
-        if (isHitHead)
+
+        if (headCollisionTarget)
+        {
             isAbleJump = false;
+            var headCollisionLogic = headCollisionTarget.GetComponent<IHeadHitting>();
+            if (headCollisionLogic != null)
+                headCollisionLogic.Hit(gameObject);
+        }
+
         if (input.IsSpacePressed && isAbleJump)
         {
             body.velocity = new Vector2(body.velocity.x, ySpeed);

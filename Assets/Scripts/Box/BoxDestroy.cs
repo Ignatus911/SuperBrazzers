@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class BoxDestroy : MonoBehaviour, BoxState
 {
     private Animator animator;
+    private bool isAlife = true;
 
     private void Awake()
     {
@@ -13,15 +12,16 @@ public class BoxDestroy : MonoBehaviour, BoxState
     }
     public void DoLogic()
     {
+        if (!isAlife)
+            return;
+        isAlife = false;
+        animator.Play("BoxDestroying");
         StartCoroutine(BoxExistCoroutine());
-        Debug.Log("Destroyed");
     }
 
     IEnumerator BoxExistCoroutine()
     {
-        animator.SetBool("isExist", false);
+        yield return new WaitForFixedUpdate();
         Destroy(GetComponent<BoxCollider2D>());
-        yield return new WaitForSeconds(1.5f);
-        Destroy(gameObject);
     }
 }

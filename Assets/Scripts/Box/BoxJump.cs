@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BoxJump : MonoBehaviour, BoxState
 {
@@ -13,8 +11,6 @@ public class BoxJump : MonoBehaviour, BoxState
 
     public void DoLogic()
     {
-        animator.SetTrigger("Jump");
-        Debug.Log("Just jump");
+        animator.Play("BoxJump");
     }
-
 }
