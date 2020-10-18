@@ -19,6 +19,12 @@ public class PlayerAnimationAspect : MonoBehaviour
         selfAnimator = GetComponent<Animator>();
         PlayerStatusController.OnChangeStatus += OnChangeStatus;
         TimeController.OnTimeChanged += OnTimeChanged;
+        PlayerJumpAspect.OnBeginFallFromCorner += OnBeginFallFromCorner;
+    }
+
+    private void OnBeginFallFromCorner(bool value)
+    {
+        selfAnimator.enabled = !value;
     }
 
     private void OnTimeChanged(bool isRunning)
@@ -31,10 +37,9 @@ public class PlayerAnimationAspect : MonoBehaviour
 
     private void OnChangeStatus(PlayerStatus status)
     {
+        selfAnimator.enabled = true;
         if (status == PlayerStatus.Big)
-        {
             selfAnimator.SetTrigger("becomeBig");
-        }
     }
 
     private void Update()

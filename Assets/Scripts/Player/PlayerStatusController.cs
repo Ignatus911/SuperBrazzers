@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerStatusController : MonoBehaviour
 {
+    [SerializeField] private AudioClip bigClip;
+
     public bool IsInvincible { get; private set; }
 
     public PlayerStatus Status { get; private set; }
@@ -13,6 +15,7 @@ public class PlayerStatusController : MonoBehaviour
     {
         if (Status != PlayerStatus.Small)
             return;
+        AudioManager.Instance.Play(bigClip);
         Status = PlayerStatus.Big;
         if (OnChangeStatus != null)
             OnChangeStatus.Invoke(Status);

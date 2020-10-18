@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerJumpAspect : MonoBehaviour
 {
+    public static Action<bool> OnBeginFallFromCorner { get; set; }
+
     private Rigidbody2D body;
     [SerializeField] private InputControl input;
     [SerializeField] private JumpChecker groundCheker;
@@ -33,6 +35,7 @@ public class PlayerJumpAspect : MonoBehaviour
             isAbleJump = true;
             isBeginJump = true;
             currentJumpTime = jumpTime;
+            OnBeginFallFromCorner?.Invoke(false);
         }
 
         if (headCollisionTarget)
@@ -45,7 +48,11 @@ public class PlayerJumpAspect : MonoBehaviour
         }
 
         if (!IsGrounded && !input.IsSpacePressed && isAbleJump)
+        {
             isAbleJump = false;
+            if (Math.Abs(currentJumpTime - jumpTime) < Mathf.Epsilon)
+                OnBeginFallFromCorner?.Invoke(true);
+        }
 
         if (input.IsSpacePressed && isAbleJump)
         {

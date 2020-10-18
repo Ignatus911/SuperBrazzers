@@ -356,6 +356,7 @@ MonoBehaviour:
       m_Bits: 768
     Checker: {fileID: 1695396876}
   ySpeed: 10
+  jumpClip: {fileID: 8300000, guid: c869ac7bec39f4540b7ab5ea624c767a, type: 3}
   jumpTime: 0.38
 --- !u!114 &1841571281
 MonoBehaviour:
@@ -381,3 +382,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a4b1953e9b4be4dba7254ee90e3674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bigClip: {fileID: 8300000, guid: 568726fcc6a128247aa2f928671ebf55, type: 3}
