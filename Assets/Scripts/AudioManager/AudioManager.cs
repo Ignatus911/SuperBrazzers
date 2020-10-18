@@ -1,15 +1,23 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance { get; private set; }
+
     [SerializeField] public List<Sound> sounds;
 
     private void Awake()
     {
-        foreach(Sound sound in sounds)
+        if (Instance == null)
+            Instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        foreach (var sound in sounds)
         {
             sound.source = gameObject.AddComponent<AudioSource>();
             sound.source.clip = sound.clip;
@@ -17,16 +25,28 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void Play(string soundName)
+    private void CreateClip(AudioClip clip, float volume = 1)
     {
-       foreach(Sound sound in sounds)
+        var sound = new Sound();
+        sound.clip = clip;
+        sound.volume = volume;
+        sound.source = gameObject.AddComponent<AudioSource>();
+        sound.source.clip = sound.clip;
+        sound.source.volume = sound.volume;
+        sounds.Add(sound);
+        sound.source.Play();
+    }
+
+    public void Play(AudioClip clip)
+    {
+        foreach (var sound in sounds)
         {
-            if (sound.clip.name == soundName)
+            if (sound.clip == clip)
             {
                 sound.source.Play();
                 return;
             }
-            else Debug.Log(soundName + " has not been found!");
         }
+        CreateClip(clip, 1);
     }
 }

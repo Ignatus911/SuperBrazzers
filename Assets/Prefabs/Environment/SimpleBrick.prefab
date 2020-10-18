@@ -407,6 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ffaad9bba9bf94092d640cb799da34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyClip: {fileID: 8300000, guid: 700f204274b92a544863bdfd2d40e944, type: 3}
 --- !u!114 &6377908385688782436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,6 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7517ae75d20aa24fb3642913bab2f10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpClip: {fileID: 8300000, guid: 84303972d48e75445a65fe427de9dd7b, type: 3}
 --- !u!114 &4162143860979487934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,10 +434,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxType: 0
-  checker: {fileID: 9180362977644260820}
-  checkerSize: 0.8
   boxDestroy: {fileID: 8100761951763890094}
   boxJump: {fileID: 6377908385688782436}
+  _boxObject: {fileID: 0}
   playerMask:
     serializedVersion: 2
     m_Bits: 2048

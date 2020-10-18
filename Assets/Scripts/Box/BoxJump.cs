@@ -4,6 +4,8 @@ public class BoxJump : MonoBehaviour, BoxState
 {
     private Animator animator;
 
+    [SerializeField] private AudioClip jumpClip;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -12,6 +14,6 @@ public class BoxJump : MonoBehaviour, BoxState
     public void DoLogic()
     {
         animator.Play("BoxJump");
-        FindObjectOfType<AudioManager>().Play("Bump");
+        AudioManager.Instance.Play(jumpClip);
     }
 }

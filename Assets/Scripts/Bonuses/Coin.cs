@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-
+    [SerializeField] private AudioClip coinClip;
     private void Awake()
     {
         GetComponent<Animator>().Play("CoinAnimation");
-        GetComponent<AudioSource>().Play();
+        AudioManager.Instance.Play(coinClip);
     }
 
     private void Die()

@@ -5,6 +5,7 @@ public class Mushroom: MonoBehaviour, IBonus
 {
     [SerializeField] private Animator mushroomAnimator;
     private bool isMoving = false;
+    [SerializeField] private AudioClip mushroomClip;
 
     [SerializeField]
     private EnemyMovementAspect movementLogic;
@@ -13,7 +14,7 @@ public class Mushroom: MonoBehaviour, IBonus
     private void Awake()
     {
         mushroomAnimator.Play("Show");
-        GetComponent<AudioSource>().Play();
+        AudioManager.Instance.Play(mushroomClip);
     }
 
     private void Update()

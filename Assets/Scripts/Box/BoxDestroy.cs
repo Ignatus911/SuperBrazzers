@@ -5,6 +5,7 @@ public class BoxDestroy : MonoBehaviour, BoxState
 {
     private Animator animator;
     private bool isAlife = true;
+    [SerializeField] private AudioClip destroyClip;
 
     private void Awake()
     {
@@ -16,6 +17,7 @@ public class BoxDestroy : MonoBehaviour, BoxState
             return;
         isAlife = false;
         animator.Play("BoxDestroying");
+        AudioManager.Instance.Play(destroyClip);
         StartCoroutine(BoxExistCoroutine());
     }
 
