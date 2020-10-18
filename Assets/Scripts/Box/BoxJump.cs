@@ -12,5 +12,6 @@ public class BoxJump : MonoBehaviour, BoxState
     public void DoLogic()
     {
         animator.Play("BoxJump");
+        FindObjectOfType<AudioManager>().Play("Bump");
     }
 }

@@ -13,6 +13,7 @@ public class Mushroom: MonoBehaviour, IBonus
     private void Awake()
     {
         mushroomAnimator.Play("Show");
+        GetComponent<AudioSource>().Play();
     }
 
     private void Update()

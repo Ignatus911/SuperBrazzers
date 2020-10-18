@@ -205,10 +205,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 6698657481323559169}
-  deadBlockSprite: {fileID: 21300000, guid: 9a51735e7679aa44d9d9144a98f5c3bb, type: 3}
+  deadBlockSprite: {fileID: -8284107637116005762, guid: f100bafeb26f1de4093406bfbc79e2fa,
+    type: 3}
   lifeTime: 0.01
   bonusType: 1
-  coinPrefab: {fileID: 76150957554624087, guid: c6f18392d590e9341b8d75743eaef22f,
+  coinPrefab: {fileID: 5352802339029536293, guid: ee024258a0567a34b95a46cad9ce5240,
     type: 3}
   mushromPrefab: {fileID: 3920419837824247661, guid: 5cd889da0c3297048adfb52a2a1b244c,
     type: 3}
