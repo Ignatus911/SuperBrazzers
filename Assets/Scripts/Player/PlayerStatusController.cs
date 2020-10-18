@@ -20,4 +20,10 @@ public class PlayerStatusController : MonoBehaviour
         if (OnChangeStatus != null)
             OnChangeStatus.Invoke(Status);
     }
+
+    public void Hit()
+    {
+        //Если большой то мелкий
+        //если мелкий то умри
+    }
 }

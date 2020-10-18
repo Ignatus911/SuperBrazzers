@@ -125,7 +125,7 @@ MonoBehaviour:
   collisionsChecker: {fileID: 1461668979978553176}
   collisionsMask:
     serializedVersion: 2
-    m_Bits: 34615
+    m_Bits: 1847
 --- !u!114 &1461668979416483253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,7 +264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1461668979978553176}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: CollisionsChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}

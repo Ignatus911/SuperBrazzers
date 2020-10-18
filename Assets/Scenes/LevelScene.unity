@@ -403,12 +403,12 @@ PrefabInstance:
     - target: {fileID: 3844921908557798374, guid: 5730e6958d2f1fa48b5f6f7c691cdf1e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.13
+      value: -6.64
       objectReference: {fileID: 0}
     - target: {fileID: 3844921908557798374, guid: 5730e6958d2f1fa48b5f6f7c691cdf1e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.89
+      value: -3.16
       objectReference: {fileID: 0}
     - target: {fileID: 3844921908557798374, guid: 5730e6958d2f1fa48b5f6f7c691cdf1e,
         type: 3}
@@ -5646,12 +5646,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e30caa03d7185914292db7a1dfe407da, type: 3}
---- !u!4 &1058085135919099597 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1461668979978553176, guid: 18ee01a77a156514d920146b81b8ae77,
-    type: 3}
-  m_PrefabInstance: {fileID: 1938789616576391573}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1190923375176514378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5802,16 +5796,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1461668979416483208, guid: 18ee01a77a156514d920146b81b8ae77,
-        type: 3}
-      propertyPath: collisionsChecker
-      value: 
-      objectReference: {fileID: 1058085135919099597}
-    - target: {fileID: 1461668979416483208, guid: 18ee01a77a156514d920146b81b8ae77,
-        type: 3}
-      propertyPath: collisionsMask.m_Bits
-      value: 34615
-      objectReference: {fileID: 0}
     - target: {fileID: 1461668979416483212, guid: 18ee01a77a156514d920146b81b8ae77,
         type: 3}
       propertyPath: m_LocalPosition.x
