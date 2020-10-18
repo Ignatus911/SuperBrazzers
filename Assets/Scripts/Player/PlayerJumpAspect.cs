@@ -8,6 +8,7 @@ public class PlayerJumpAspect : MonoBehaviour
     [SerializeField] private JumpChecker groundCheker;
     [SerializeField] private JumpChecker headCheker;
     [SerializeField] private float ySpeed = 2;
+    [SerializeField] private AudioClip jumpClip;
 
     [SerializeField]
     private float jumpTime = 0.35f;
@@ -21,6 +22,7 @@ public class PlayerJumpAspect : MonoBehaviour
     }
 
     private bool isAbleJump;
+    private bool isBeginJump;
 
     private void Update()
     {
@@ -29,19 +31,29 @@ public class PlayerJumpAspect : MonoBehaviour
         if (IsGrounded && !input.IsSpacePressed)
         {
             isAbleJump = true;
+            isBeginJump = true;
             currentJumpTime = jumpTime;
         }
 
         if (headCollisionTarget)
         {
             isAbleJump = false;
+            AudioManager.Instance.Stop(jumpClip);
             var headCollisionLogic = headCollisionTarget.GetComponent<IHeadHitting>();
             if (headCollisionLogic != null)
                 headCollisionLogic.Hit(gameObject);
         }
 
+        if (!IsGrounded && !input.IsSpacePressed && isAbleJump)
+            isAbleJump = false;
+
         if (input.IsSpacePressed && isAbleJump)
         {
+            if (isBeginJump)
+            {
+                AudioManager.Instance.Play(jumpClip);
+                isBeginJump = false;
+            }
             body.velocity = new Vector2(body.velocity.x, ySpeed);
             currentJumpTime -= Time.deltaTime;
             if (currentJumpTime <= 0)

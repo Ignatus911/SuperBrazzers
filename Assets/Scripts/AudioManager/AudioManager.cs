@@ -49,4 +49,16 @@ public class AudioManager : MonoBehaviour
         }
         CreateClip(clip, 1);
     }
+
+    public void Stop(AudioClip clip)
+    {
+        foreach (var sound in sounds)
+        {
+            if (sound.clip == clip)
+            {
+                sound.source.Stop();
+                return;
+            }
+        }
+    }
 }

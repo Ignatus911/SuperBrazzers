@@ -439,6 +439,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1224101799, guid: 5730e6958d2f1fa48b5f6f7c691cdf1e, type: 3}
+      propertyPath: jumpClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c869ac7bec39f4540b7ab5ea624c767a, type: 3}
     - target: {fileID: 3844921908557798372, guid: 5730e6958d2f1fa48b5f6f7c691cdf1e,
         type: 3}
       propertyPath: m_Name
