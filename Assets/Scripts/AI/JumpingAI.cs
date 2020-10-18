@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class JumpingAI : MonoBehaviour, IAiState
+public class JumpingAI : MonoBehaviour
 {
     [SerializeField]
     private float ySpeed;

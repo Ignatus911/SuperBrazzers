@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MovementAI : MonoBehaviour, IAiState
+public class MovementAI : MonoBehaviour
 {
     [SerializeField]
     private float xSpeed;
