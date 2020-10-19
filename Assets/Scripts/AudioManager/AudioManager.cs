@@ -1,11 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
-    [SerializeField] public List<Sound> sounds;
+    [SerializeField] AudioSource musicSource;
+    [SerializeField] AudioSource soundSource;
+    [SerializeField] AudioClip currentMusic;
+    [SerializeField] AudioClip pauseSound;
+    [SerializeField, Range(0.2f, 1f)] float pauseSoundTime;
+    [SerializeField] List<AudioClip> musics;
+    [SerializeField] List<AudioClip> sounds;
+
 
     private void Awake()
     {
@@ -17,46 +25,33 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        foreach (var sound in sounds)
-        {
-            sound.source = gameObject.AddComponent<AudioSource>();
-            sound.source.clip = sound.clip;
-            sound.source.volume = sound.volume;
-        }
+        TimeController.OnPauseGame += OnPauseGame;
+        musicSource.Play();
     }
 
-    private void CreateClip(AudioClip clip, float volume = 1)
+    private void OnPauseGame(bool timeIsStoped)
     {
-        var sound = new Sound();
-        sound.clip = clip;
-        sound.volume = volume;
-        sound.source = gameObject.AddComponent<AudioSource>();
-        sound.source.clip = sound.clip;
-        sound.source.volume = sound.volume;
-        sounds.Add(sound);
-        sound.source.Play();
+        Play(pauseSound);
+        if (musicSource.isPlaying)
+            musicSource.Pause();
+        else StartCoroutine(waitWileEndPauseSound());
+            
+    }
+
+    IEnumerator waitWileEndPauseSound()
+    {
+        yield return new WaitForSeconds(pauseSoundTime);
+        musicSource.UnPause();
     }
 
     public void Play(AudioClip clip)
     {
-        foreach (var sound in sounds)
+        foreach(var sound in sounds)
         {
-            if (sound.clip == clip)
+            if(sound == clip)
             {
-                sound.source.Play();
-                return;
-            }
-        }
-        CreateClip(clip, 1);
-    }
-
-    public void Stop(AudioClip clip)
-    {
-        foreach (var sound in sounds)
-        {
-            if (sound.clip == clip)
-            {
-                sound.source.Stop();
+                soundSource.clip = sound;
+                soundSource.Play();
                 return;
             }
         }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class TimeController : MonoBehaviour
 {
     public static Action<bool> OnTimeChanged;
+    public static Action<bool> OnPauseGame;
     private bool isStopped = false;
 
     private void Awake()
@@ -49,6 +50,9 @@ public class TimeController : MonoBehaviour
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
+        {
             ChangeTimeScale();
+            OnPauseGame(isStopped);
+        }
     }
 }
