@@ -4,6 +4,7 @@ public class PlayerDirectionAspect : MonoBehaviour
 {
     [SerializeField] private InputControl control;
     [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private PlayerJumpAspect jumpAspect;
 
     public bool IsLookRight { get; set; } = true;
 
@@ -12,7 +13,8 @@ public class PlayerDirectionAspect : MonoBehaviour
         if (IsLookRight == right)
             return;
         IsLookRight = right;
-        sprite.flipX = !IsLookRight;
+        if (jumpAspect.IsGrounded)
+            sprite.flipX = !IsLookRight;
     }
 
     private void Update()

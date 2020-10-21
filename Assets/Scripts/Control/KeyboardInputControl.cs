@@ -15,5 +15,6 @@ public class KeyboardInputControl : InputControl
         }
         IsShiftPressed = Input.GetKey(KeyCode.LeftShift);
         IsSpacePressed = Input.GetKey(KeyCode.Space);
+        IsSeatKeyPressed = Input.GetKey(KeyCode.S);
     }
 }

@@ -7,4 +7,6 @@ public abstract class InputControl : MonoBehaviour
     public bool IsShiftPressed { get; protected set; } = false;
 
     public bool IsSpacePressed { get; protected set; } = false;
+
+    public bool IsSeatKeyPressed { get; protected set; } = false;
 }

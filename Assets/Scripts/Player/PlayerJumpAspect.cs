@@ -41,7 +41,6 @@ public class PlayerJumpAspect : MonoBehaviour
         if (headCollisionTarget)
         {
             isAbleJump = false;
-            //AudioManager.Instance.Stop(jumpClip);
             var headCollisionLogic = headCollisionTarget.GetComponent<IHeadHitting>();
             if (headCollisionLogic != null)
                 headCollisionLogic.Hit(gameObject);

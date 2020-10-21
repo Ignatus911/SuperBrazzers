@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSizeAspet : MonoBehaviour
+public class PlayerSizeController : MonoBehaviour
 {
 
     private BoxCollider2D playerCollider;

@@ -5,6 +5,7 @@ public class PlayerAnimationAspect : MonoBehaviour
     private Animator selfAnimator;
 
     [SerializeField] private PlayerMovementAspect movementAspect;
+    [SerializeField] private PlayerSeatingAspect seatingAspect;
     [SerializeField] private PlayerJumpAspect playerJumpAspect;
     [SerializeField] private PlayerStatusController playerStatusController;
     [SerializeField] private float animationSpeedCorrector = 1;
@@ -48,6 +49,7 @@ public class PlayerAnimationAspect : MonoBehaviour
         selfAnimator.SetBool("isRunning", IsRunning && playerJumpAspect.IsGrounded);
         selfAnimator.SetBool("isStoping", movementAspect.IsStopping);
         selfAnimator.SetBool("isJumping", !playerJumpAspect.IsGrounded);
+        selfAnimator.SetBool("isSeating", seatingAspect.IsSeating);
     }
 
     public void BecomeSmall()

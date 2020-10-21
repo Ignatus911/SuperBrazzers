@@ -7,7 +7,7 @@ public class PlayerStatusController : MonoBehaviour
     public PlayerStatus Status { get; private set; }
     public static Action<PlayerStatus> OnChangeStatus;
 
-    [SerializeField] private PlayerSizeAspet playerSizeAspet;
+    [SerializeField] private PlayerSizeController playerSizeAspet;
 
     public void BecomeBig()
     {

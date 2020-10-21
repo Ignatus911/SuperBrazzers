@@ -423,6 +423,10 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.58
       objectReference: {fileID: 0}
+    - target: {fileID: 1224101798, guid: 5730e6958d2f1fa48b5f6f7c691cdf1e, type: 3}
+      propertyPath: seatingAspect
+      value: 
+      objectReference: {fileID: 1841571294}
     - target: {fileID: 1841571291, guid: 5730e6958d2f1fa48b5f6f7c691cdf1e, type: 3}
       propertyPath: bigCollider.Array.data[1].x
       value: 4
@@ -467,6 +471,11 @@ PrefabInstance:
       propertyPath: playerSizeAspet
       value: 
       objectReference: {fileID: 1841571293}
+    - target: {fileID: 1921091371923260214, guid: 5730e6958d2f1fa48b5f6f7c691cdf1e,
+        type: 3}
+      propertyPath: jumpAspect
+      value: 
+      objectReference: {fileID: 1841571284}
     - target: {fileID: 3844921908557798372, guid: 5730e6958d2f1fa48b5f6f7c691cdf1e,
         type: 3}
       propertyPath: m_Name
@@ -5106,6 +5115,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b70906636e0b1e45a0384e37b2b83d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1841571284 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1224101799, guid: 5730e6958d2f1fa48b5f6f7c691cdf1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 364749891}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841571280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e507cd4b05a704e8f9742850f3918c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1841571285 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3986871713939785255, guid: 5730e6958d2f1fa48b5f6f7c691cdf1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 364749891}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841571280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac3c69fd3962264c82a000fb2393a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1841571291 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1841571291, guid: 5730e6958d2f1fa48b5f6f7c691cdf1e,
@@ -5136,9 +5169,25 @@ MonoBehaviour:
     size: {x: 0.8, y: 0.58}
   bigPlayerCollider:
     UpHitCheckerPosition: 1
-    offset: {x: -0.03, y: -0.2}
+    offset: {x: -0.03, y: 0.2}
     size: {x: 0.8, y: 1.5}
   UpHitCheckerPosition: {fileID: 1777458773}
+--- !u!114 &1841571294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841571280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 049fc9e9e4b6445428f2a94c02a3aaae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 1841571283}
+  sizeController: {fileID: 1841571293}
+  movementAspect: {fileID: 1841571285}
+  playerStatus: {fileID: 1841571291}
 --- !u!1 &1955670476 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1459525016530343876, guid: d835c9c9dd38b8844b97ac0ea701d88d,
