@@ -49,9 +49,9 @@ public class ScoreController : MonoBehaviour
     // Update is called once per frame
     void Update()
 {
-        ScoreText.text = "Score: " + score.ToString();
-        CoinsText.text = "Coins: " + coins.ToString();
-        CurrentWorldText.text = "CurrentWorld";// привязать к названию ЛВЛа или создать список связзаный с текущим ЛВЛом
-        TimeText.text = "time: " + time.ToString();
+        ScoreText.text = "MARIO \n" + score.ToString("D6");
+        CoinsText.text = "\n" + "ЖX" + coins.ToString("D2");
+        CurrentWorldText.text = "WORLD\n" + "1-1";// привязать к названию ЛВЛа или создать список связзаный с текущим ЛВЛом
+        TimeText.text = "time\n" + time.ToString("D3");
     }
 }
