@@ -13,7 +13,7 @@ public class PlayerDirectionAspect : MonoBehaviour
         if (IsLookRight == right)
             return;
         IsLookRight = right;
-        if (jumpAspect.IsGrounded)
+        //if (jumpAspect.IsGrounded)
             sprite.flipX = !IsLookRight;
     }
 

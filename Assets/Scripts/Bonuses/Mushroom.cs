@@ -6,6 +6,7 @@ public class Mushroom: MonoBehaviour, IBonus
     [SerializeField] private Animator mushroomAnimator;
     private bool isMoving = false;
     [SerializeField] private AudioClip mushroomClip;
+    [SerializeField] private AudioClip PowerupClip;
 
     [SerializeField]
     private EnemyMovementAspect movementLogic;
@@ -30,6 +31,7 @@ public class Mushroom: MonoBehaviour, IBonus
             return;
         user.GetComponent<PlayerStatusController>().BecomeBig();
         Destroy(gameObject);
+        AudioManager.Instance.Play(PowerupClip);
     }
 
     [UsedImplicitly]

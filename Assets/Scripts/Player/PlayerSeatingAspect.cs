@@ -27,7 +27,6 @@ public class PlayerSeatingAspect : MonoBehaviour
     {
         if (playerStatus.Status == PlayerStatus.Big)
         {
-            Debug.Log(IsSeating);
             if (IsSeating)
             {
                 sizeController.setSmallCollider();

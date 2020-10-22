@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 820159220}
   - component: {fileID: 820159221}
   - component: {fileID: 2416765667344861515}
-  m_Layer: 12
+  m_Layer: 16
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5315908931302164995}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: CollisionChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 5786615927901208574}
   - component: {fileID: 1019052031}
   - component: {fileID: 8965711334803348564}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Mushroom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,5 +328,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mushroomAnimator: {fileID: 5786615927901208574}
   mushroomClip: {fileID: 8300000, guid: 6f449a6f528453644915aecf890b9177, type: 3}
+  PowerupClip: {fileID: 8300000, guid: 568726fcc6a128247aa2f928671ebf55, type: 3}
   movementLogic: {fileID: 8656136953101380287}
   speed: 7

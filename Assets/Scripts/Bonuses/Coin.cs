@@ -5,7 +5,7 @@ public class Coin : MonoBehaviour
     [SerializeField] private AudioClip coinClip;
     private void Awake()
     {
-        GetComponent<Animator>().Play("CoinAnimation");
+        GetComponent<Animator>().Play("CoinAppearsAnimation");
         AudioManager.Instance.Play(coinClip);
     }
 
