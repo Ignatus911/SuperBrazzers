@@ -30,8 +30,9 @@ public class Mushroom: MonoBehaviour, IBonus
         if (!isMoving)
             return;
         user.GetComponent<PlayerStatusController>().BecomeBig();
-        Destroy(gameObject);
         AudioManager.Instance.Play(PowerupClip);
+        ScoreController.Instance.AddScore(1000);
+        Destroy(gameObject);
     }
 
     [UsedImplicitly]

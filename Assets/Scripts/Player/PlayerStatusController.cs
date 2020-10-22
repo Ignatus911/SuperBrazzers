@@ -24,6 +24,14 @@ public class PlayerStatusController : MonoBehaviour
     {
         //Если большой то мелкий
         //если мелкий то умри
+        if (Status == PlayerStatus.Small)
+        {
+            ScoreController.Instance.DecreaseLives();
+            //показать количесвто жизней, начать с контрольной точки
+            return;
+        }
+        Status = PlayerStatus.Small;
+        OnChangeStatus.Invoke(Status);
         playerSizeAspet.setSmallCollider();
     }
 }

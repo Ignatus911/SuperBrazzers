@@ -14,6 +14,8 @@ public class StaticCoin : MonoBehaviour, IBonus
     public void Use(GameObject user)
     {
         AudioManager.Instance.Play(coinClip);
+        ScoreController.Instance.AddScore(200);
+        ScoreController.Instance.IncreaseCoins();
         Destroy(gameObject);
     }
 
