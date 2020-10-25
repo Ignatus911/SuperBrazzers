@@ -2,5 +2,6 @@
 {
     Small,
     Big,
-    Super
+    Super,
+    Dead
 }

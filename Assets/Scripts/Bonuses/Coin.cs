@@ -6,7 +6,7 @@ public class Coin : MonoBehaviour
     private void Awake()
     {
         GetComponent<Animator>().Play("CoinAppearsAnimation");
-        AudioManager.Instance.Play(coinClip);
+        AudioManager.Instance.PlaySound(coinClip);
         ScoreController.Instance.AddScore(200);
         ScoreController.Instance.IncreaseCoins();
     }

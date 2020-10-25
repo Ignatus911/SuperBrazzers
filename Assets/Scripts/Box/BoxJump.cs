@@ -14,6 +14,6 @@ public class BoxJump : MonoBehaviour, BoxState
     public void DoLogic()
     {
         animator.Play("BoxJump");
-        AudioManager.Instance.Play(jumpClip);
+        AudioManager.Instance.PlaySound(jumpClip);
     }
 }

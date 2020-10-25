@@ -57,7 +57,7 @@ public class PlayerJumpAspect : MonoBehaviour
         {
             if (isBeginJump)
             {
-                AudioManager.Instance.Play(jumpClip);
+                AudioManager.Instance.PlaySound(jumpClip);
                 isBeginJump = false;
             }
             body.velocity = new Vector2(body.velocity.x, ySpeed);

@@ -39,8 +39,18 @@ public class PlayerAnimationAspect : MonoBehaviour
     private void OnChangeStatus(PlayerStatus status)
     {
         selfAnimator.enabled = true;
-        if (status == PlayerStatus.Big)
-            selfAnimator.SetTrigger("becomeBig");
+        switch (status)
+        {
+            case PlayerStatus.Big:
+                selfAnimator.SetTrigger("becomeBig");
+                break;
+            case PlayerStatus.Small:
+                selfAnimator.SetTrigger("becomeSmall");
+                break;
+            case PlayerStatus.Dead:
+                selfAnimator.SetTrigger("isDead");
+                break;
+        }
     }
 
     private void Update()
@@ -50,11 +60,6 @@ public class PlayerAnimationAspect : MonoBehaviour
         selfAnimator.SetBool("isStoping", movementAspect.IsStopping);
         selfAnimator.SetBool("isJumping", !playerJumpAspect.IsGrounded);
         selfAnimator.SetBool("isSeating", seatingAspect.IsSeating);
-    }
-
-    public void BecomeSmall()
-    {
-        selfAnimator.SetTrigger("becomeSmall");
     }
 
     private float GetAnimationSpeed()

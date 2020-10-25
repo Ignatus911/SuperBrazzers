@@ -14,16 +14,26 @@ public class TimeController : MonoBehaviour
         PlayerStatusController.OnChangeStatus += OnChangeStatus;
     }
 
-    private void OnChangeStatus(PlayerStatus obj)
+    private void OnChangeStatus(PlayerStatus status)
     {
         StopTime();
-        StartCoroutine(ChangeStatusEnumerator());
+        StartCoroutine(ChangeStatusEnumerator(status));
     }
 
-    private IEnumerator ChangeStatusEnumerator()
+    private IEnumerator ChangeStatusEnumerator(PlayerStatus status)
     {
-        yield return new WaitForSecondsRealtime(1);
-        ContinueTime();
+        switch (status)
+        {
+            case (PlayerStatus.Dead):
+                yield return new WaitForSecondsRealtime(3);
+                ContinueTime();
+                SceneController.Instance.LoadDeathScreen();
+                break;
+            default:
+                yield return new WaitForSecondsRealtime(1);
+                ContinueTime();
+                break;
+        }
     }
 
     public void StopTime()

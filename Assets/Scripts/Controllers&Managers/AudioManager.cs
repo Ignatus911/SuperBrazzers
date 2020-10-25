@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource soundSource;
-    [SerializeField] AudioClip currentMusic;
+    [SerializeField] AudioClip mainTheme;
     [SerializeField] AudioClip pauseSound;
     [SerializeField, Range(0.2f, 1f)] float pauseSoundTime;
     [SerializeField] List<AudioClip> musics;
@@ -26,12 +26,12 @@ public class AudioManager : MonoBehaviour
         }
 
         TimeController.OnPauseGame += OnPauseGame;
-        musicSource.Play();
+        PlayMusic(mainTheme);
     }
 
     private void OnPauseGame(bool timeIsStoped)
     {
-        Play(pauseSound);
+        PlaySound(pauseSound);
         if (musicSource.isPlaying)
             musicSource.Pause();
         else StartCoroutine(waitWileEndPauseSound());
@@ -44,7 +44,7 @@ public class AudioManager : MonoBehaviour
         musicSource.UnPause();
     }
 
-    public void Play(AudioClip clip)
+    public void PlaySound(AudioClip clip)
     {
         foreach(var sound in sounds)
         {
@@ -52,6 +52,19 @@ public class AudioManager : MonoBehaviour
             {
                 soundSource.clip = sound;
                 soundSource.Play();
+                return;
+            }
+        }
+    }
+
+    public void PlayMusic(AudioClip clip)
+    {
+        foreach(var music in musics)
+        {
+            if(music == clip)
+            {
+                musicSource.clip = music;
+                musicSource.Play();
                 return;
             }
         }

@@ -15,7 +15,7 @@ public class Mushroom: MonoBehaviour, IBonus
     private void Awake()
     {
         mushroomAnimator.Play("Show");
-        AudioManager.Instance.Play(mushroomClip);
+        AudioManager.Instance.PlaySound(mushroomClip);
     }
 
     private void Update()
@@ -30,7 +30,7 @@ public class Mushroom: MonoBehaviour, IBonus
         if (!isMoving)
             return;
         user.GetComponent<PlayerStatusController>().BecomeBig();
-        AudioManager.Instance.Play(PowerupClip);
+        AudioManager.Instance.PlaySound(PowerupClip);
         ScoreController.Instance.AddScore(1000);
         Destroy(gameObject);
     }

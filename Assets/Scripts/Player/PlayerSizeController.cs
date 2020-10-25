@@ -25,6 +25,6 @@ public class PlayerSizeController : MonoBehaviour
     {
         playerCollider.offset = smallPlayerCollider.offset;
         playerCollider.size = smallPlayerCollider.size;
-        UpHitCheckerPosition.position = new Vector2(UpHitCheckerPosition.localPosition.x, smallPlayerCollider.UpHitCheckerPosition);
+        UpHitCheckerPosition.localPosition = new Vector2(UpHitCheckerPosition.localPosition.x, smallPlayerCollider.UpHitCheckerPosition);
     }
 }

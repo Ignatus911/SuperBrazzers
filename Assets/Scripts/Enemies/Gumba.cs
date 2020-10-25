@@ -8,7 +8,8 @@ public class Gumba : MonoBehaviour, IEnemy
     [SerializeField] private EnemyDirectionAspect directionAspect;
     [SerializeField] private EnemyMovementAspect movementAspect;
     [SerializeField] private float speed;
-
+    [SerializeField] private GameObject deatPoint;
+    [SerializeField] private AudioClip dieClip;
     private void Awake()
     {
         directionAspect.LookAt(isLookRight);
@@ -16,14 +17,26 @@ public class Gumba : MonoBehaviour, IEnemy
 
     public void Update()
     {
-        if (!IsAlife)
-            return;
+        if (IsAlife)
+            movementAspect.Move(speed);
+        else
+        {
+            movementAspect.Move(0);
 
-        movementAspect.Move(speed);
+        }
+
     }
 
     public void Hit()
     {
-        throw new System.NotImplementedException();
+        IsAlife = false;
+        Destroy(deatPoint);
+        GetComponent<Animator>().SetBool("isDead", true);
+        AudioManager.Instance.PlaySound(dieClip);
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
     }
 }

@@ -45,12 +45,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d5658c7e352fc5439934d365956eb82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSource: {fileID: 0}
-  soundSource: {fileID: 0}
-  currentMusic: {fileID: 0}
-  currenSound: {fileID: 0}
-  musics: []
-  sounds: []
+  musicSource: {fileID: 3296839413613078528}
+  soundSource: {fileID: 9053815891449427362}
+  mainTheme: {fileID: 8300000, guid: 6d40b3fdc7cbae646942efffdb9906fa, type: 3}
+  pauseSound: {fileID: 8300000, guid: 115ee9a04c53b4d4b94d4feae61e6374, type: 3}
+  pauseSoundTime: 0.68
+  musics:
+  - {fileID: 8300000, guid: ba925f1a08a38f64fb7e0224eaff3972, type: 3}
+  - {fileID: 8300000, guid: e263cd64456ddb843824a405b954b140, type: 3}
+  - {fileID: 8300000, guid: 6d40b3fdc7cbae646942efffdb9906fa, type: 3}
+  - {fileID: 8300000, guid: 6a2024600825f2949ac7902c35ec77cc, type: 3}
+  - {fileID: 8300000, guid: 453ec6501e6a3024189fd294ec079369, type: 3}
+  - {fileID: 8300000, guid: aeed9b6f47606de40b463d1061b583ca, type: 3}
+  sounds:
+  - {fileID: 8300000, guid: 06f8ea8f356d9da489141f58792babf2, type: 3}
+  - {fileID: 8300000, guid: 700f204274b92a544863bdfd2d40e944, type: 3}
+  - {fileID: 8300000, guid: 84303972d48e75445a65fe427de9dd7b, type: 3}
+  - {fileID: 8300000, guid: 91f042d01feb97044b514834aa68f8c4, type: 3}
+  - {fileID: 8300000, guid: 9765078290b7977499e4aecee1a58c70, type: 3}
+  - {fileID: 8300000, guid: e67f41802e409c04b9e4d6f268adaa91, type: 3}
+  - {fileID: 8300000, guid: ce392ad0578799e449b7191b964eedd8, type: 3}
+  - {fileID: 8300000, guid: c869ac7bec39f4540b7ab5ea624c767a, type: 3}
+  - {fileID: 8300000, guid: 9340268614262744693f5aa7a7fbca1b, type: 3}
+  - {fileID: 8300000, guid: 72df0ee87237cda4386bd67e1915368b, type: 3}
+  - {fileID: 8300000, guid: 115ee9a04c53b4d4b94d4feae61e6374, type: 3}
+  - {fileID: 8300000, guid: 128ff7db1250b3b4bb362d7a451b06b9, type: 3}
+  - {fileID: 8300000, guid: 568726fcc6a128247aa2f928671ebf55, type: 3}
+  - {fileID: 8300000, guid: 6f449a6f528453644915aecf890b9177, type: 3}
+  - {fileID: 8300000, guid: c3545bb651a0a3f449855f264cf9630c, type: 3}
 --- !u!82 &3296839413613078528
 AudioSource:
   m_ObjectHideFlags: 0
@@ -61,9 +83,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6d40b3fdc7cbae646942efffdb9906fa, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -159,7 +181,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -17,7 +17,7 @@ public class BoxDestroy : MonoBehaviour, BoxState
             return;
         isAlife = false;
         animator.Play("BoxDestroying");
-        AudioManager.Instance.Play(destroyClip);
+        AudioManager.Instance.PlaySound(destroyClip);
         StartCoroutine(BoxExistCoroutine());
     }
 

@@ -162,6 +162,8 @@ GameObject:
   - component: {fileID: 1224101799}
   - component: {fileID: 1841571281}
   - component: {fileID: 1841571291}
+  - component: {fileID: 1841571293}
+  - component: {fileID: 1841571294}
   m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
@@ -218,7 +220,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03128147, y: -0.31247923}
+  m_Offset: {x: -0.03, y: -0.3}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -229,7 +231,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.80122185, y: 0.5741988}
+  m_Size: {x: 0.8, y: 0.58}
   m_EdgeRadius: 0
 --- !u!50 &721853409
 Rigidbody2D:
@@ -282,6 +284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   control: {fileID: 5278284309573154519}
   sprite: {fileID: 3844921907839630921}
+  jumpAspect: {fileID: 1224101799}
 --- !u!114 &1224101798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementAspect: {fileID: 3986871713939785255}
+  seatingAspect: {fileID: 1841571294}
   playerJumpAspect: {fileID: 1224101799}
   playerStatusController: {fileID: 1841571291}
   animationSpeedCorrector: 10
@@ -371,6 +375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStatusController: {fileID: 1841571291}
+  PlayerGroundController: {fileID: 672741616}
 --- !u!114 &1841571291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,4 +388,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a4b1953e9b4be4dba7254ee90e3674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bigClip: {fileID: 8300000, guid: 568726fcc6a128247aa2f928671ebf55, type: 3}
+  deathTheme: {fileID: 8300000, guid: ba925f1a08a38f64fb7e0224eaff3972, type: 3}
+  becomeSmallClip: {fileID: 8300000, guid: 128ff7db1250b3b4bb362d7a451b06b9, type: 3}
+  playerSizeAspet: {fileID: 1841571293}
+--- !u!114 &1841571293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3844921908557798372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee1ce14f24886d468461cf87e914d28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smallPlayerCollider:
+    UpHitCheckerPosition: 0.055
+    offset: {x: -0.03, y: -0.3}
+    size: {x: 0.8, y: 0.58}
+  bigPlayerCollider:
+    UpHitCheckerPosition: 1
+    offset: {x: -0.03, y: 0.2}
+    size: {x: 0.8, y: 1.5}
+  UpHitCheckerPosition: {fileID: 1695396876}
+--- !u!114 &1841571294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3844921908557798372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 049fc9e9e4b6445428f2a94c02a3aaae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 5278284309573154519}
+  sizeController: {fileID: 1841571293}
+  movementAspect: {fileID: 3986871713939785255}
+  playerStatus: {fileID: 1841571291}
