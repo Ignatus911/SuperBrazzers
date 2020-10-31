@@ -1,0 +1,113 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+
+public class ScoreController : MonoBehaviour
+{
+    public static ScoreController Instance { get; private set; }
+    private int coins = 0;
+    private int score = 0;
+    private int lives = 3;
+    private int time = 400;
+    [SerializeField] private Text scoreText;
+    [SerializeField] private Text coinsText;
+    [SerializeField] private Text currentWorldText;
+    [SerializeField] private Text timeText;
+    [SerializeField] private Text currentWorldTextDeathScreen;
+    [SerializeField] private Text livesText;
+    [SerializeField] private Image marioSprite;
+
+    [SerializeField] private GameObject loadingUI;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            Debug.Log("new one");
+        }
+        else
+        {
+            Debug.Log("clone is dead");
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
+        AddScore(0);
+        IncreaseCoins(0);
+        WriteWorld(1, 1);
+        SceneController.OnSceneLoaded += OnSceneLoaded;
+        OnSceneLoaded("");
+    }
+
+    private void OnSceneLoaded(string sceneName)
+    {
+        SetLoadingUIScreen(sceneName == SceneController.DEATH_SCENE_NAME);
+    }
+
+    public void AddScore(int value)
+    {
+        score += value;
+        scoreText.text = "MARIO \n" + score.ToString("D6");
+    }
+
+    public void WriteWorld(int world, int stage)
+    {
+        currentWorldText.text = string.Format("WORLD\n{0}-{1}", world, stage);
+        currentWorldTextDeathScreen.text = string.Format("WORLD {0}-{1}", world, stage);
+    }
+
+    public void IncreaseLives()
+    {
+        lives++;
+        WriteLifes();
+    }
+
+    public void DecreaseLives()
+    {
+        lives--;
+        if (lives < 1)
+        {
+            // GameOver screan;
+            //Destroy(gameObject);
+        }
+        WriteLifes();
+    }
+
+    private void WriteLifes()
+    {
+        livesText.text = string.Format(" X {0}", lives.ToString("D2"));
+    }
+
+    public void IncreaseCoins(int value = 1) {
+        coins += value;
+        if (coins == 100)
+        {
+            coins = 0;
+            IncreaseLives();
+        }
+        coinsText.text = string.Format("\n X{0}", coins.ToString("D2"));
+    }
+
+    public void SetLoadingUIScreen(bool value)
+    {
+        loadingUI.SetActive(value);
+    }
+
+    //private void Update()
+    //{
+    //    if (!SceneController.Instance.isDeathScreen())
+    //    {
+    //        timeText.text = "time\n" + time.ToString("D3");
+    //        currentWorldTextDeathScreen.enabled = false;
+    //        livesText.enabled = false;
+    //        marioSprite.enabled = false;
+    //    }
+    //    else
+    //    {
+    //        timeText.text = "time\n";
+    //        currentWorldTextDeathScreen.enabled = true;
+    //        livesText.enabled = true;
+    //        marioSprite.enabled = true;
+    //    }
+    //}
+}

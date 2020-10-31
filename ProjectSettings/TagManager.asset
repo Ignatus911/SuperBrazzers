@@ -13,15 +13,15 @@ TagManager:
   - UI
   - 
   - 
+  - Ground
+  - Environment
+  - Enemies
+  - Player
+  - CollisionChecker
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Mushrom
+  - Bonuses
   - 
   - 
   - 
@@ -40,4 +40,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 86481077
+    locked: 0
+  - name: Enemies
+    uniqueID: 384981179
+    locked: 0
+  - name: Mushroom
+    uniqueID: 406713751
+    locked: 0
+  - name: Player
+    uniqueID: 588320805
+    locked: 0
+  - name: Boxes
+    uniqueID: 3009228791
     locked: 0
