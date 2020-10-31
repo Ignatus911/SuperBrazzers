@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class StaticCoin : MonoBehaviour, IBonus
+public class StaticCoin : BonusCommonLogic
 {
     [SerializeField] private AudioClip coinClip;
 
@@ -11,18 +9,12 @@ public class StaticCoin : MonoBehaviour, IBonus
         GetComponent<Animator>().Play("StaticCoin");
     }
 
-    public void Use(GameObject user)
+    public override void UseImplementation(GameObject user)
     {
+        isAlife = false;
         AudioManager.Instance.PlaySound(coinClip);
         ScoreController.Instance.AddScore(200);
         ScoreController.Instance.IncreaseCoins();
         Destroy(gameObject);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 }

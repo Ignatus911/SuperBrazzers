@@ -23,6 +23,13 @@ public class PlayerAnimationAspect : MonoBehaviour
         PlayerJumpAspect.OnBeginFallFromCorner += OnBeginFallFromCorner;
     }
 
+    private void OnDestroy()
+    {
+        PlayerStatusController.OnChangeStatus -= OnChangeStatus;
+        TimeController.OnTimeChanged -= OnTimeChanged;
+        PlayerJumpAspect.OnBeginFallFromCorner -= OnBeginFallFromCorner;
+    }
+
     private void OnBeginFallFromCorner(bool value)
     {
         selfAnimator.enabled = !value;

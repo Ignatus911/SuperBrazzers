@@ -13,8 +13,10 @@ public class ScoreController : MonoBehaviour
     [SerializeField] private Text currentWorldText;
     [SerializeField] private Text timeText;
     [SerializeField] private Text currentWorldTextDeathScreen;
-    [SerializeField] private Text livesTextext;
+    [SerializeField] private Text livesText;
     [SerializeField] private Image marioSprite;
+
+    [SerializeField] private GameObject loadingUI;
 
     private void Awake()
     {
@@ -30,52 +32,82 @@ public class ScoreController : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
+        AddScore(0);
+        IncreaseCoins(0);
+        WriteWorld(1, 1);
+        SceneController.OnSceneLoaded += OnSceneLoaded;
+        OnSceneLoaded("");
     }
 
-    public void AddScore(int value) { score += value; }
+    private void OnSceneLoaded(string sceneName)
+    {
+        SetLoadingUIScreen(sceneName == SceneController.DEATH_SCENE_NAME);
+    }
 
-    public void IncreaseLives() { lives++; }
-    public void DecreaseLives() {
+    public void AddScore(int value)
+    {
+        score += value;
+        scoreText.text = "MARIO \n" + score.ToString("D6");
+    }
+
+    public void WriteWorld(int world, int stage)
+    {
+        currentWorldText.text = string.Format("WORLD\n{0}-{1}", world, stage);
+        currentWorldTextDeathScreen.text = string.Format("WORLD {0}-{1}", world, stage);
+    }
+
+    public void IncreaseLives()
+    {
+        lives++;
+        WriteLifes();
+    }
+
+    public void DecreaseLives()
+    {
         lives--;
         if (lives < 1)
         {
             // GameOver screan;
             //Destroy(gameObject);
         }
+        WriteLifes();
     }
 
-    public void IncreaseCoins() {
-        coins++;
-        if(coins == 100)
+    private void WriteLifes()
+    {
+        livesText.text = string.Format(" X {0}", lives.ToString("D2"));
+    }
+
+    public void IncreaseCoins(int value = 1) {
+        coins += value;
+        if (coins == 100)
         {
             coins = 0;
             IncreaseLives();
         }
+        coinsText.text = string.Format("\n X{0}", coins.ToString("D2"));
     }
 
-
-    // Update is called once per frame
-    void Update()
+    public void SetLoadingUIScreen(bool value)
     {
-        scoreText.text = "MARIO \n" + score.ToString("D6");
-        coinsText.text = "\n" + "ЖX" + coins.ToString("D2");
-        currentWorldText.text = "WORLD\n" + "1-1";// привязать к названию ЛВЛа или создать список связзаный с текущим ЛВЛом
-        currentWorldTextDeathScreen.text = "WORLD 1-1";// привязать к названию ЛВЛа или создать список связзаный с текущим ЛВЛом
-        livesTextext.text = " X " + lives.ToString("D2");
-
-        if (!SceneController.Instance.isDeathScreen())
-        {
-            timeText.text = "time\n" + time.ToString("D3");
-            currentWorldTextDeathScreen.enabled = false;
-            livesTextext.enabled = false;
-            marioSprite.enabled = false;
-        }
-        else
-        {
-            timeText.text = "time\n";
-            currentWorldTextDeathScreen.enabled = true;
-            livesTextext.enabled = true;
-            marioSprite.enabled = true;
-        }
+        loadingUI.SetActive(value);
     }
+
+    //private void Update()
+    //{
+    //    if (!SceneController.Instance.isDeathScreen())
+    //    {
+    //        timeText.text = "time\n" + time.ToString("D3");
+    //        currentWorldTextDeathScreen.enabled = false;
+    //        livesText.enabled = false;
+    //        marioSprite.enabled = false;
+    //    }
+    //    else
+    //    {
+    //        timeText.text = "time\n";
+    //        currentWorldTextDeathScreen.enabled = true;
+    //        livesText.enabled = true;
+    //        marioSprite.enabled = true;
+    //    }
+    //}
 }

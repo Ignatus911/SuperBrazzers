@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TimeController : MonoBehaviour
@@ -12,6 +11,11 @@ public class TimeController : MonoBehaviour
     private void Awake()
     {
         PlayerStatusController.OnChangeStatus += OnChangeStatus;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerStatusController.OnChangeStatus -= OnChangeStatus;
     }
 
     private void OnChangeStatus(PlayerStatus status)

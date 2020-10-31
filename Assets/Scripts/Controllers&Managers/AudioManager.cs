@@ -27,6 +27,13 @@ public class AudioManager : MonoBehaviour
 
         TimeController.OnPauseGame += OnPauseGame;
         PlayMusic(mainTheme);
+        SceneController.OnSceneLoaded += ProceedScene;
+    }
+
+    private void ProceedScene(string sceneName)
+    {
+        if (sceneName == SceneController.SCENE_NAME)
+            PlayMusic(mainTheme);
     }
 
     private void OnPauseGame(bool timeIsStoped)

@@ -31,7 +31,7 @@ public class Gumba : MonoBehaviour, IEnemy
     {
         IsAlife = false;
         Destroy(deatPoint);
-        GetComponent<Animator>().SetBool("isDead", true);
+        GetComponent<Animator>().Play("GumdaDeath", -1, 0);
         AudioManager.Instance.PlaySound(dieClip);
     }
 

@@ -1,7 +1,7 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
 
-public class Mushroom: MonoBehaviour, IBonus
+public class Mushroom: BonusCommonLogic
 {
     [SerializeField] private Animator mushroomAnimator;
     private bool isMoving = false;
@@ -25,16 +25,20 @@ public class Mushroom: MonoBehaviour, IBonus
         movementLogic.Move(speed);
     }
 
-    public void Use(GameObject user)
+    public override void UseImplementation(GameObject user)
     {
         if (!isMoving)
             return;
+        isAlife = false;
         user.GetComponent<PlayerStatusController>().BecomeBig();
         AudioManager.Instance.PlaySound(PowerupClip);
         ScoreController.Instance.AddScore(1000);
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Вызывается в анимации, позволяет грибу двигаться
+    /// </summary>
     [UsedImplicitly]
     public void AllowToMove()
     {

@@ -1,49 +1,38 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class SceneController : MonoBehaviour
 {
+    public const string DEATH_SCENE_NAME = "DeathScene";
+    public const string SCENE_NAME = "World1-1";
+
     public static SceneController Instance { get; private set; }
+
+    public static Action<string> OnSceneLoaded;
 
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
         else
-        {
             Destroy(gameObject);
-            return;
-        }
-    }
-
-    public bool isDeathScreen()
-    {
-        return SceneManager.GetActiveScene().name == "DeathScene";
-    }
-
-    public void GameOver()
-    {
-        // Убить все скрипты, загрузить стартовый экран
-    }
-
-    public void LoadNextLVL()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        DontDestroyOnLoad(gameObject);
     }
 
     public void LoadDeathScreen()
     {
-        SceneManager.LoadScene("DeathScene");
+        SceneManager.LoadScene(DEATH_SCENE_NAME);
+        OnSceneLoaded?.Invoke(DEATH_SCENE_NAME);
         StartCoroutine(DeathSceneTime());
     }
 
 
     private IEnumerator DeathSceneTime()
     {
-        Debug.Log("poshlo 5 secund");
-        yield return new WaitForSecondsRealtime(3);
-        Debug.Log("proshlo 5 secund");
-        SceneManager.LoadScene("World1-1");
+        yield return new WaitForSecondsRealtime(1);
+        SceneManager.LoadScene(SCENE_NAME);
+        OnSceneLoaded?.Invoke(SCENE_NAME);
     }
 }
