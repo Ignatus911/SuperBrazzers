@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Gumba : MonoBehaviour, IEnemy
+public class Gumba : MonoBehaviour, IEnemy, IBlockPushable
 {
     public bool IsAlife { get; private set; } = true;
 
@@ -38,5 +38,10 @@ public class Gumba : MonoBehaviour, IEnemy
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void Push()
+    {
+        Hit();
     }
 }

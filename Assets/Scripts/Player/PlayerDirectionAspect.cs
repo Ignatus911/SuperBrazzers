@@ -5,15 +5,14 @@ public class PlayerDirectionAspect : MonoBehaviour
     [SerializeField] private InputControl control;
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private PlayerJumpAspect jumpAspect;
+    private bool flipOnGround;
 
     public bool IsLookRight { get; set; } = true;
 
     public void LookAt(bool right)
     {
-        if (IsLookRight == right)
-            return;
         IsLookRight = right;
-        //if (jumpAspect.IsGrounded)
+        if (jumpAspect.IsGrounded)
             sprite.flipX = !IsLookRight;
     }
 

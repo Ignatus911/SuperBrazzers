@@ -12,8 +12,7 @@ public class PlayerJumpAspect : MonoBehaviour
     [SerializeField] private float ySpeed = 2;
     [SerializeField] private AudioClip jumpClip;
 
-    [SerializeField]
-    private float jumpTime = 0.35f;
+    [SerializeField] private float jumpTime = 0.35f;
     private float currentJumpTime;
 
     public bool IsGrounded { get; private set; }
@@ -28,8 +27,10 @@ public class PlayerJumpAspect : MonoBehaviour
 
     private void Update()
     {
-        IsGrounded = Physics2D.OverlapBox(groundCheker.Checker.transform.position, new Vector2(groundCheker.CheckerSize, Mathf.Epsilon), 0f, groundCheker.Mask);
-        var headCollisionTarget = Physics2D.OverlapBox(headCheker.Checker.transform.position, new Vector2(headCheker.CheckerSize, Mathf.Epsilon), 0f, headCheker.Mask);
+        IsGrounded = Physics2D.OverlapBox(groundCheker.Checker.transform.position,
+            new Vector2(groundCheker.CheckerSize, Mathf.Epsilon), 0f, groundCheker.Mask);
+        var headCollisionTarget = Physics2D.OverlapBox(headCheker.Checker.transform.position,
+            new Vector2(headCheker.CheckerSize, Mathf.Epsilon), 0f, headCheker.Mask);
         if (IsGrounded && !input.IsSpacePressed)
         {
             isAbleJump = true;
@@ -38,7 +39,7 @@ public class PlayerJumpAspect : MonoBehaviour
             OnBeginFallFromCorner?.Invoke(false);
         }
 
-        if (headCollisionTarget)
+        if (headCollisionTarget && !IsGrounded && body.velocity.y > 0)
         {
             isAbleJump = false;
             var headCollisionLogic = headCollisionTarget.GetComponent<IHeadHitting>();
@@ -60,11 +61,18 @@ public class PlayerJumpAspect : MonoBehaviour
                 AudioManager.Instance.PlaySound(jumpClip);
                 isBeginJump = false;
             }
+
             body.velocity = new Vector2(body.velocity.x, ySpeed);
             currentJumpTime -= Time.deltaTime;
             if (currentJumpTime <= 0)
                 isAbleJump = false;
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(headCheker.Checker.transform.position, headCheker.CheckerSize);
     }
 }
 

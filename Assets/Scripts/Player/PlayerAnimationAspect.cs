@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 
 public class PlayerAnimationAspect : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class PlayerAnimationAspect : MonoBehaviour
     [SerializeField] private PlayerJumpAspect playerJumpAspect;
     [SerializeField] private PlayerStatusController playerStatusController;
     [SerializeField] private float animationSpeedCorrector = 1;
+
+    [SerializeField] private PlayerAnimationsSet animationSets;
+
+    private AnimationClip lastClip;
+    private bool freezeUpdateLogic;
 
     private bool IsRunning
     {
@@ -45,28 +51,72 @@ public class PlayerAnimationAspect : MonoBehaviour
 
     private void OnChangeStatus(PlayerStatus status)
     {
+        var currentAnimation = PlayerAnimationState.NoState;
         selfAnimator.enabled = true;
         switch (status)
         {
             case PlayerStatus.Big:
-                selfAnimator.SetTrigger("becomeBig");
+                currentAnimation = PlayerAnimationState.BecomeBig;
+                freezeUpdateLogic = true;
                 break;
             case PlayerStatus.Small:
-                selfAnimator.SetTrigger("becomeSmall");
+                currentAnimation = PlayerAnimationState.BecomeBig;
+                freezeUpdateLogic = true;
                 break;
             case PlayerStatus.Dead:
-                selfAnimator.SetTrigger("isDead");
+                currentAnimation = PlayerAnimationState.Dead;
+                freezeUpdateLogic = true;
                 break;
+        }
+        FinishAnimate(currentAnimation);
+    }
+
+    [UsedImplicitly]
+    private void UnFreezeUpdateLogic()
+    {
+        freezeUpdateLogic = false;
+    }
+
+    private void FinishAnimate(PlayerAnimationState currentState)
+    {
+        var currentClip = animationSets.GetClip(currentState, playerStatusController.Status == PlayerStatus.Big);
+        if (currentClip != null && lastClip != currentClip)
+        {
+            lastClip = currentClip;
+            selfAnimator.Play(currentClip.name, -1, 0);
         }
     }
 
     private void Update()
     {
+        if (freezeUpdateLogic)
+            return;
         selfAnimator.speed = GetAnimationSpeed();
-        selfAnimator.SetBool("isRunning", IsRunning && playerJumpAspect.IsGrounded);
-        selfAnimator.SetBool("isStoping", movementAspect.IsStopping);
-        selfAnimator.SetBool("isJumping", !playerJumpAspect.IsGrounded);
-        selfAnimator.SetBool("isSeating", seatingAspect.IsSeating);
+
+        PlayerAnimationState currentAnimation = PlayerAnimationState.Idle;
+
+        if (seatingAspect.IsSeating)
+        {
+            currentAnimation = PlayerAnimationState.Sit;
+            FinishAnimate(currentAnimation);
+            return;
+        }
+
+        if (!playerJumpAspect.IsGrounded)
+        {
+            currentAnimation = PlayerAnimationState.Jump;
+            FinishAnimate(currentAnimation);
+            return;
+        }
+
+        if (IsRunning && playerJumpAspect.IsGrounded)
+        {
+            currentAnimation = movementAspect.IsStopping ? PlayerAnimationState.Stopping : PlayerAnimationState.Run;
+            FinishAnimate(currentAnimation);
+            return;
+        }
+
+        FinishAnimate(currentAnimation);
     }
 
     private float GetAnimationSpeed()

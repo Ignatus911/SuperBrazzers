@@ -302,6 +302,40 @@ MonoBehaviour:
   playerJumpAspect: {fileID: 1224101799}
   playerStatusController: {fileID: 1841571291}
   animationSpeedCorrector: 10
+  animationSets:
+    Clips:
+    - ElementName: Idle
+      LittleClip: {fileID: 7400000, guid: 58a032798ed964a4d8511a72c7189a14, type: 2}
+      BigClip: {fileID: 7400000, guid: eb792599870d72a41a4f2126e6191b72, type: 2}
+      ClipValue: 0
+    - ElementName: Run
+      LittleClip: {fileID: 7400000, guid: c820a5a5108901d4ead4ac0299650bdf, type: 2}
+      BigClip: {fileID: 7400000, guid: 31b5f9be2f477114d9c2319747571ee1, type: 2}
+      ClipValue: 1
+    - ElementName: Jump
+      LittleClip: {fileID: 7400000, guid: f6c18d8a165ff564f8e9d2969286555c, type: 2}
+      BigClip: {fileID: 7400000, guid: 60031585a4f3d41418f0a0a9d94be799, type: 2}
+      ClipValue: 3
+    - ElementName: Sit
+      LittleClip: {fileID: 0}
+      BigClip: {fileID: 7400000, guid: 6f5799edc7298334f83208969b313731, type: 2}
+      ClipValue: 4
+    - ElementName: Stop
+      LittleClip: {fileID: 7400000, guid: aa421bbf7f82bf547b7cd4a24015f240, type: 2}
+      BigClip: {fileID: 7400000, guid: c4727624d6ee4b147b43c449db41e7d8, type: 2}
+      ClipValue: 4
+    - ElementName: BecomeBig
+      LittleClip: {fileID: 7400000, guid: 67d8bd99b4ed87c4dac4b818e41cb936, type: 2}
+      BigClip: {fileID: 7400000, guid: 67d8bd99b4ed87c4dac4b818e41cb936, type: 2}
+      ClipValue: 5
+    - ElementName: BecomeSmall
+      LittleClip: {fileID: 7400000, guid: 9b12e7ecff91fba46a9c2e8ccb0003d1, type: 2}
+      BigClip: {fileID: 7400000, guid: 9b12e7ecff91fba46a9c2e8ccb0003d1, type: 2}
+      ClipValue: 6
+    - ElementName: Dead
+      LittleClip: {fileID: 7400000, guid: fdd46766bbe5ef349a24d1b5e734da21, type: 2}
+      BigClip: {fileID: 7400000, guid: fdd46766bbe5ef349a24d1b5e734da21, type: 2}
+      ClipValue: 7
 --- !u!114 &5278284309573154519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,6 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b70906636e0b1e45a0384e37b2b83d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStatus: {fileID: 0}
 --- !u!114 &3986871713939785255
 MonoBehaviour:
   m_ObjectHideFlags: 0

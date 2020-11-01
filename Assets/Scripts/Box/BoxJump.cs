@@ -6,6 +6,8 @@ public class BoxJump : MonoBehaviour, BoxState
 
     [SerializeField] private AudioClip jumpClip;
 
+    [SerializeField] private JumpChecker headCheker;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -15,5 +17,13 @@ public class BoxJump : MonoBehaviour, BoxState
     {
         animator.Play("BoxJump");
         AudioManager.Instance.PlaySound(jumpClip);
+
+        var headCollisionTarget = Physics2D.OverlapBox(headCheker.Checker.transform.position,
+            new Vector2(headCheker.CheckerSize, Mathf.Epsilon), 0f, headCheker.Mask);
+        if (headCollisionTarget != null)
+        {
+            var pushable = headCollisionTarget.GetComponent<IBlockPushable>();
+            pushable?.Push();
+        }
     }
 }

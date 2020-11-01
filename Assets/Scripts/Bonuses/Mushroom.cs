@@ -1,7 +1,7 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
 
-public class Mushroom: BonusCommonLogic
+public class Mushroom: BonusCommonLogic, IBlockPushable
 {
     [SerializeField] private Animator mushroomAnimator;
     private bool isMoving = false;
@@ -43,5 +43,10 @@ public class Mushroom: BonusCommonLogic
     public void AllowToMove()
     {
         isMoving = true;
+    }
+
+    public void Push()
+    {
+        GetComponent<EnemyDirectionAspect>()?.Rotate();
     }
 }
