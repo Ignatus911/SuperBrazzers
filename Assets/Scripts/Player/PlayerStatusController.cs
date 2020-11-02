@@ -31,7 +31,7 @@ public class PlayerStatusController : MonoBehaviour
         playerSizeAspet.setSmallCollider();
     }
 
-    private void BecomeDead()
+    public void BecomeDead()
     {
         ScoreController.Instance.DecreaseLives();
         AudioManager.Instance.PlayMusic(deathTheme);

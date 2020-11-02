@@ -7,15 +7,10 @@ public class TimeController : MonoBehaviour
     public static Action<bool> OnTimeChanged;
     public static Action<bool> OnPauseGame;
     private bool isStopped = false;
-    [SerializeField] PlayerStatusController playerStatus;
-    [SerializeField] private float timeForLVLPass = 400;
-    [SerializeField] private float timerRatio = 2.5f;
-    private float currentTime;
 
     private void Awake()
     {
         PlayerStatusController.OnChangeStatus += OnChangeStatus;
-        currentTime = timeForLVLPass;
     }
 
     private void OnDestroy()
@@ -72,17 +67,6 @@ public class TimeController : MonoBehaviour
         {
             ChangeTimeScale();
             OnPauseGame(isStopped);
-        }
-        if (isStopped) return;
-        if (currentTime > 0)
-        {
-            currentTime -= Time.deltaTime * timerRatio;
-            ScoreController.Instance.WriteCurrentTime((int)currentTime);
-        }
-        else
-        {
-            //SceneController.Instance.LoadDeathScreen(); / нет визуализации смерти
-            //playerStatus.BecomeDead(); //не правильно, умирает бесконечно вечно
         }
     }
 }
