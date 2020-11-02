@@ -5451,6 +5451,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1826197470}
   - component: {fileID: 1826197469}
+  - component: {fileID: 1826197471}
   m_Layer: 0
   m_Name: TimeController
   m_TagString: Untagged
@@ -5470,9 +5471,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59494cc3d7eca5f42a3f24c68a69f98a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStatus: {fileID: 1841571291}
-  timeForLVLPass: 4
-  timerRatio: 2.5
 --- !u!4 &1826197470
 Transform:
   m_ObjectHideFlags: 0
@@ -5487,6 +5485,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1826197471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826197468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2299c8d24b305dc43a8a42831ed9e092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStatus: {fileID: 0}
+  timeForLVLPass: 400
+  timerRatio: 2.5
 --- !u!1 &1841571280 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3844921908557798372, guid: 5730e6958d2f1fa48b5f6f7c691cdf1e,
