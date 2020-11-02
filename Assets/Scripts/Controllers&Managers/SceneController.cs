@@ -31,7 +31,7 @@ public class SceneController : MonoBehaviour
 
     private IEnumerator DeathSceneTime()
     {
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(3);
         SceneManager.LoadScene(SCENE_NAME);
         OnSceneLoaded?.Invoke(SCENE_NAME);
     }

@@ -7,14 +7,15 @@ public class ScoreController : MonoBehaviour
     private int coins = 0;
     private int score = 0;
     private int lives = 3;
-    private int time = 400;
     [SerializeField] private Text scoreText;
     [SerializeField] private Text coinsText;
     [SerializeField] private Text currentWorldText;
-    [SerializeField] private Text timeText;
     [SerializeField] private Text currentWorldTextDeathScreen;
     [SerializeField] private Text livesText;
     [SerializeField] private Image marioSprite;
+    [SerializeField] private Text timeText;
+
+
 
     [SerializeField] private GameObject loadingUI;
 
@@ -23,11 +24,9 @@ public class ScoreController : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            Debug.Log("new one");
         }
         else
         {
-            Debug.Log("clone is dead");
             Destroy(gameObject);
             return;
         }
@@ -75,7 +74,7 @@ public class ScoreController : MonoBehaviour
 
     private void WriteLifes()
     {
-        livesText.text = string.Format(" X {0}", lives.ToString("D2"));
+        livesText.text = string.Format(" X  {0}", lives.ToString());
     }
 
     public void IncreaseCoins(int value = 1) {
@@ -85,12 +84,17 @@ public class ScoreController : MonoBehaviour
             coins = 0;
             IncreaseLives();
         }
-        coinsText.text = string.Format("\n X{0}", coins.ToString("D2"));
+        coinsText.text = string.Format(" X{0}", coins.ToString("D2"));
     }
 
     public void SetLoadingUIScreen(bool value)
     {
         loadingUI.SetActive(value);
+    }
+
+    public void WriteCurrentTime(int currentTime)
+    {
+        timeText.text = string.Format("time\n {0}", currentTime.ToString("D3"));
     }
 
     //private void Update()
