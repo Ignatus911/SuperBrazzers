@@ -13,6 +13,7 @@ public class KeyboardInputControl : InputControl
 
     private void Update()
     {
+        if (TimeController.PlayerSetPause) return;
         if (playerStatus.Status == PlayerStatus.Big && (jumpAspect.IsGrounded || IsSeatKeyPressed))
             IsSeatKeyPressed = Input.GetKey(KeyCode.S);
         else

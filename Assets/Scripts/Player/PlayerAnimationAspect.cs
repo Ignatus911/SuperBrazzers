@@ -43,7 +43,7 @@ public class PlayerAnimationAspect : MonoBehaviour
 
     private void OnTimeChanged(bool isRunning)
     {
-        if (isRunning)
+        if (isRunning || TimeController.PlayerSetPause)
             selfAnimator.updateMode = AnimatorUpdateMode.Normal;
         else
             selfAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;

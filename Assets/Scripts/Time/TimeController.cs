@@ -7,6 +7,8 @@ public class TimeController : MonoBehaviour
     public static Action<bool> OnTimeChanged;
     public static Action<bool> OnPauseGame;
     private bool isStopped = false;
+    private static bool playerSetPause = false;
+    public static bool PlayerSetPause => playerSetPause;
 
     private void Awake()
     {
@@ -60,11 +62,12 @@ public class TimeController : MonoBehaviour
         else
             ContinueTime();
     }
-    //убивать с анимацией, звуком, таймер запускать после загрузки уровня.
+
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
+            playerSetPause = !playerSetPause;
             ChangeTimeScale();
             OnPauseGame(isStopped);
         }
