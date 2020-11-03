@@ -10,6 +10,7 @@ public class Gumba : MonoBehaviour, IEnemy, IBlockPushable
     [SerializeField] private float speed;
     [SerializeField] private GameObject deatPoint;
     [SerializeField] private AudioClip dieClip;
+    private bool deathFromPushedBlock = false;
     private void Awake()
     {
         directionAspect.LookAt(isLookRight);
@@ -31,7 +32,11 @@ public class Gumba : MonoBehaviour, IEnemy, IBlockPushable
     {
         IsAlife = false;
         Destroy(deatPoint);
-        GetComponent<Animator>().Play("GumdaDeath", -1, 0);
+        if (deathFromPushedBlock)
+        {
+            GetComponent<Animator>().Play("DeathFromPushedBox", -1, 0);
+        }
+        else GetComponent<Animator>().Play("GumdaDeath", -1, 0);
         AudioManager.Instance.PlaySound(dieClip);
     }
 
@@ -42,6 +47,7 @@ public class Gumba : MonoBehaviour, IEnemy, IBlockPushable
 
     public void Push()
     {
+        deathFromPushedBlock = true;
         Hit();
     }
 }

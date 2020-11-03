@@ -18,6 +18,7 @@ public class TimeController : MonoBehaviour
     private void OnDestroy()
     {
         PlayerStatusController.OnChangeStatus -= OnChangeStatus;
+        playerSetPause = false;
     }
 
     private void OnChangeStatus(PlayerStatus status)

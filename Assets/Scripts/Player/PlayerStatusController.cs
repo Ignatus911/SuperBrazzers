@@ -39,6 +39,11 @@ public class PlayerStatusController : MonoBehaviour
         OnChangeStatus.Invoke(Status);
     }
 
+    public void LoadDeathScreen()
+    {
+        SceneController.Instance.LoadDeathScreen();
+    }
+
     public void Hit()
     {
         if (Status == PlayerStatus.Small)
