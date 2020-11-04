@@ -23,7 +23,7 @@ public class BoxJump : MonoBehaviour, BoxState
         if (headCollisionTarget != null)
         {
             var pushable = headCollisionTarget.GetComponent<IBlockPushable>();
-            pushable?.Push();
+            pushable?.Push(gameObject);
         }
     }
 }

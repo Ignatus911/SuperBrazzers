@@ -1,5 +1,7 @@
-﻿public interface IEnemy
+﻿using UnityEngine;
+
+public interface IEnemy
 {
-    bool IsAlife { get; }
-    void Hit();
+    void Hit(GameObject hitter);
+    bool IsAlife { get; }    
 }

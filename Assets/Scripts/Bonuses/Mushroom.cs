@@ -45,7 +45,7 @@ public class Mushroom: BonusCommonLogic, IBlockPushable
         isMoving = true;
     }
 
-    public void Push()
+    public void Push(GameObject pusher)
     {
         GetComponent<EnemyDirectionAspect>()?.Rotate();
     }

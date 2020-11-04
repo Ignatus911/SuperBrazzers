@@ -1,4 +1,6 @@
-﻿public interface IBlockPushable
+﻿using UnityEngine;
+
+public interface IBlockPushable
 {
-    void Push();
+    void Push(GameObject pusher);
 }

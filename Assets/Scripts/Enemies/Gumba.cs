@@ -10,6 +10,12 @@ public class Gumba : MonoBehaviour, IEnemy, IBlockPushable
     [SerializeField] private float speed;
     [SerializeField] private GameObject deatPoint;
     [SerializeField] private AudioClip dieClip;
+    [SerializeField] private int scoreByPlayerKilling = 100;
+    [SerializeField] private int scoreByTurtleKilling = 500;
+    [SerializeField] private AnimationClip smashedAnimation;
+    [SerializeField] private AnimationClip kickedUpAnimation;
+    private string playerTag = "Player";
+    private string turtleTag = "Turtle";
     private bool deathFromPushedBlock = false;
     private void Awake()
     {
@@ -23,20 +29,32 @@ public class Gumba : MonoBehaviour, IEnemy, IBlockPushable
         else
         {
             movementAspect.Move(0);
-
         }
-
+        Debug.Log(IsAlife);
     }
 
-    public void Hit()
+    public void Hit(GameObject hitter)
     {
+        AnimationClip animation;
         IsAlife = false;
         Destroy(deatPoint);
-        if (deathFromPushedBlock)
+
+        switch (hitter.tag)
         {
-            GetComponent<Animator>().Play("DeathFromPushedBox", -1, 0);
+            case ("Turtle"):
+                animation = kickedUpAnimation;
+                ScoreController.Instance.AddScore(scoreByTurtleKilling, false, true);
+                break;
+            case ("Player"):
+                animation = smashedAnimation;
+                ScoreController.Instance.AddScore(scoreByPlayerKilling, true, false);
+                break;
+            default:
+                animation = kickedUpAnimation;
+                ScoreController.Instance.AddScore(scoreByPlayerKilling, true, false);
+                break;
         }
-        else GetComponent<Animator>().Play("GumdaDeath", -1, 0);
+        GetComponent<Animator>().Play(animation.name);
         AudioManager.Instance.PlaySound(dieClip);
     }
 
@@ -45,9 +63,9 @@ public class Gumba : MonoBehaviour, IEnemy, IBlockPushable
         Destroy(gameObject);
     }
 
-    public void Push()
+    public void Push(GameObject pusher)
     {
         deathFromPushedBlock = true;
-        Hit();
+        Hit(pusher);
     }
 }

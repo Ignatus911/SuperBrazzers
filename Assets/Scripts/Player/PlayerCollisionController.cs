@@ -21,7 +21,7 @@ public class PlayerCollisionController : MonoBehaviour
             var deathPoint = other.gameObject.GetComponent<Transform>();
             float enemyDeathPoint = deathPoint.position.y;
             float playerFeetPosition = PlayerGroundController.position.y;
-            if (playerFeetPosition >= enemyDeathPoint) { enemyComponent.Hit(); }
+            if (playerFeetPosition >= enemyDeathPoint) { enemyComponent.Hit(gameObject); }
             else playerStatusController.Hit();
         }
     }

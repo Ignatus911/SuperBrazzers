@@ -49,6 +49,12 @@ public class ScoreController : MonoBehaviour
         scoreText.text = "MARIO \n" + score.ToString("D6");
     }
 
+    public void AddScore(int value, bool killByPlayer, bool killByTurtle)
+    {
+        score += value;
+        scoreText.text = "MARIO \n" + score.ToString("D6");
+    }
+
     public void WriteWorld(int world, int stage)
     {
         currentWorldText.text = string.Format("WORLD\n{0}-{1}", world, stage);
