@@ -6,9 +6,10 @@ public class ScoreController : MonoBehaviour
 {
     public static ScoreController Instance { get; private set; }
     private int score = 0;
+    private int coins = 0;
+    private int lives = 3;
     private float playerComboTimer = 0;
     private float turtleComboTimer = 0;
-    private float killedByTurtleEnemiesTimer = 0;
     private int killedByPlayerEnemies = 0;
     private int killedByTurtleEnemies = 0;
 
@@ -46,7 +47,7 @@ public class ScoreController : MonoBehaviour
         }
         if (killByTurtle)
         {
-            turtleComboTimer = 1;
+            turtleComboTimer = 2;
             playerKillingByTurtleCombo = true;
             killedByTurtleEnemies++;
             value = 500 + 300 * (killedByTurtleEnemies-1);// 500 за первого, на 300 больше за каждого последующего 
@@ -54,6 +55,34 @@ public class ScoreController : MonoBehaviour
         Debug.Log("killedByTurtleEnemies = " + killedByTurtleEnemies + ",value = " + value);
         score += value;
         UIController.Instance.ShowScore(score);
+    }
+
+    public void IncreaseCoins(int value = 1)
+    {
+        coins += value;
+        if (coins == 100)
+        {
+            coins = 0;
+            IncreaseLives();
+        }
+        UIController.Instance.ShowCoins(coins);
+    }
+
+    public void IncreaseLives()
+    {
+        lives++;
+        UIController.Instance.WriteLifes(lives);
+    }
+
+    public void DecreaseLives()
+    {
+        lives--;
+        if (lives < 1)
+        {
+            // GameOver screan;
+            //Destroy(gameObject);
+        }
+        UIController.Instance.WriteLifes(lives);
     }
 
     void Update()

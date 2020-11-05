@@ -34,6 +34,8 @@ public class Gumba : MonoBehaviour, IEnemy, IBlockPushable
 
     public void Hit(GameObject hitter)
     {
+        if (!IsAlife)
+            return;
         AnimationClip animation;
         IsAlife = false;
         Destroy(deatPoint);

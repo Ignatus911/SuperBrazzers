@@ -33,7 +33,7 @@ public class PlayerStatusController : MonoBehaviour
 
     public void BecomeDead()
     {
-        UIController.Instance.DecreaseLives();
+        ScoreController.Instance.DecreaseLives();
         AudioManager.Instance.PlayMusic(deathTheme);
         Status = PlayerStatus.Dead;
         OnChangeStatus.Invoke(Status);

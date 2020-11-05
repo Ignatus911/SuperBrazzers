@@ -8,7 +8,7 @@ public class Coin : MonoBehaviour
         GetComponent<Animator>().Play("CoinAppearsAnimation");
         AudioManager.Instance.PlaySound(coinClip);
         ScoreController.Instance.AddScore(200);
-        UIController.Instance.IncreaseCoins();
+        ScoreController.Instance.IncreaseCoins();
     }
 
     private void Die()
