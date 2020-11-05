@@ -52,7 +52,6 @@ public class ScoreController : MonoBehaviour
             killedByTurtleEnemies++;
             value = 500 + 300 * (killedByTurtleEnemies-1);// 500 за первого, на 300 больше за каждого последующего 
         }
-        Debug.Log("killedByTurtleEnemies = " + killedByTurtleEnemies + ",value = " + value);
         score += value;
         UIController.Instance.ShowScore(score);
     }

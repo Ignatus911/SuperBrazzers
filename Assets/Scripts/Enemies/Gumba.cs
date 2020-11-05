@@ -47,6 +47,7 @@ public class Gumba : MonoBehaviour, IEnemy, IBlockPushable
                 ScoreController.Instance.AddScore(scoreByTurtleKilling, false, true);
                 break;
             case ("Player"):
+                hitter.GetComponent<PlayerJumpAspect>().BounceOnEnemy();
                 animation = smashedAnimation;
                 ScoreController.Instance.AddScore(scoreByPlayerKilling, true, false);
                 break;

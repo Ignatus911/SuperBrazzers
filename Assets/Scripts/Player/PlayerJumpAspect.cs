@@ -11,6 +11,7 @@ public class PlayerJumpAspect : MonoBehaviour
     [SerializeField] private JumpChecker headCheker;
     [SerializeField] private float ySpeed = 2;
     [SerializeField] private AudioClip jumpClip;
+    [SerializeField, Range(0.5f,30f)] private float jumpFromEnemy = 2f;
 
     [SerializeField] private float jumpTime = 0.35f;
     private float currentJumpTime;
@@ -24,6 +25,11 @@ public class PlayerJumpAspect : MonoBehaviour
 
     private bool isAbleJump;
     private bool isBeginJump;
+
+    public void BounceOnEnemy()
+    {
+        body.velocity = new Vector2(body.velocity.x, jumpFromEnemy);
+    }
 
     private void Update()
     {
