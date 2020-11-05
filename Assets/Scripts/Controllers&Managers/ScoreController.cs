@@ -5,6 +5,7 @@ using UnityEngine;
 public class ScoreController : MonoBehaviour
 {
     public static ScoreController Instance { get; private set; }
+    [SerializeField] private PointsSpawner pointsSpawner;
     private int score = 0;
     private int coins = 0;
     private int lives = 3;
@@ -50,9 +51,10 @@ public class ScoreController : MonoBehaviour
             turtleComboTimer = 2;
             playerKillingByTurtleCombo = true;
             killedByTurtleEnemies++;
-            value = 500 + 300 * (killedByTurtleEnemies-1);// 500 за первого, на 300 больше за каждого последующего 
+            value = value + 300 * (killedByTurtleEnemies-1);// 500 за первого, на 300 больше за каждого последующего 
         }
         score += value;
+        pointsSpawner.SpawnPoints(value);
         UIController.Instance.ShowScore(score);
     }
 
