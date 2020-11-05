@@ -30,7 +30,6 @@ public class Gumba : MonoBehaviour, IEnemy, IBlockPushable
         {
             movementAspect.Move(0);
         }
-        Debug.Log(IsAlife);
     }
 
     public void Hit(GameObject hitter)

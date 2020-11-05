@@ -14,7 +14,7 @@ public class StaticCoin : BonusCommonLogic
         isAlife = false;
         AudioManager.Instance.PlaySound(coinClip);
         ScoreController.Instance.AddScore(200);
-        ScoreController.Instance.IncreaseCoins();
+        UIController.Instance.IncreaseCoins();
         Destroy(gameObject);
     }
 }

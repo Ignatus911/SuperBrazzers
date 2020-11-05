@@ -35,7 +35,7 @@ public class Timer : MonoBehaviour
         if (currentTime > 0)
         {
             currentTime -= Time.deltaTime * timerRatio;
-            ScoreController.Instance.WriteCurrentTime((int)currentTime);
+            UIController.Instance.WriteCurrentTime((int)currentTime);
         }
         else  playerStatus.BecomeDead();
     }

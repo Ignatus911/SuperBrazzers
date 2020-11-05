@@ -1,23 +1,20 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class ScoreController : MonoBehaviour
 {
     public static ScoreController Instance { get; private set; }
-    private int coins = 0;
     private int score = 0;
-    private int lives = 3;
-    [SerializeField] private Text scoreText;
-    [SerializeField] private Text coinsText;
-    [SerializeField] private Text currentWorldText;
-    [SerializeField] private Text currentWorldTextDeathScreen;
-    [SerializeField] private Text livesText;
-    [SerializeField] private Image marioSprite;
-    [SerializeField] private Text timeText;
+    private float playerComboTimer = 0;
+    private float turtleComboTimer = 0;
+    private float killedByTurtleEnemiesTimer = 0;
+    private int killedByPlayerEnemies = 0;
+    private int killedByTurtleEnemies = 0;
 
+    private bool playerKillingCombo;
+    private bool playerKillingByTurtleCombo;
 
-
-    [SerializeField] private GameObject loadingUI;
 
     private void Awake()
     {
@@ -31,93 +28,53 @@ public class ScoreController : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
-        AddScore(0);
-        IncreaseCoins(0);
-        WriteWorld(1, 1);
-        SceneController.OnSceneLoaded += OnSceneLoaded;
-        OnSceneLoaded("");
     }
-
-    private void OnSceneLoaded(string sceneName)
-    {
-        SetLoadingUIScreen(sceneName == SceneController.DEATH_SCENE_NAME);
-    }
-
-    public void AddScore(int value)
+        public void AddScore(int value)
     {
         score += value;
-        scoreText.text = "MARIO \n" + score.ToString("D6");
+        UIController.Instance.ShowScore(score);
     }
 
     public void AddScore(int value, bool killByPlayer, bool killByTurtle)
     {
+        if (killByPlayer)
+        {
+            playerComboTimer = 1;
+            playerKillingCombo = true;
+            killedByPlayerEnemies++;
+            value = value * (int)Mathf.Pow(2, killedByPlayerEnemies - 1);// при убийстве нескольких врагов подряд прогрессия 2 в степени убийств
+        }
+        if (killByTurtle)
+        {
+            turtleComboTimer = 1;
+            playerKillingByTurtleCombo = true;
+            killedByTurtleEnemies++;
+            value = 500 + 300 * (killedByTurtleEnemies-1);// 500 за первого, на 300 больше за каждого последующего 
+        }
+        Debug.Log("killedByTurtleEnemies = " + killedByTurtleEnemies + ",value = " + value);
         score += value;
-        scoreText.text = "MARIO \n" + score.ToString("D6");
+        UIController.Instance.ShowScore(score);
     }
 
-    public void WriteWorld(int world, int stage)
+    void Update()
     {
-        currentWorldText.text = string.Format("WORLD\n{0}-{1}", world, stage);
-        currentWorldTextDeathScreen.text = string.Format("WORLD {0}-{1}", world, stage);
-    }
-
-    public void IncreaseLives()
-    {
-        lives++;
-        WriteLifes();
-    }
-
-    public void DecreaseLives()
-    {
-        lives--;
-        if (lives < 1)
+        if (playerKillingCombo)
         {
-            // GameOver screan;
-            //Destroy(gameObject);
+            playerComboTimer -= Time.deltaTime;
+            if (playerComboTimer < 0)
+            {
+                playerKillingCombo = false;
+                killedByPlayerEnemies = 0;
+            }
         }
-        WriteLifes();
-    }
-
-    private void WriteLifes()
-    {
-        livesText.text = string.Format(" X  {0}", lives.ToString());
-    }
-
-    public void IncreaseCoins(int value = 1) {
-        coins += value;
-        if (coins == 100)
+        if (playerKillingByTurtleCombo)
         {
-            coins = 0;
-            IncreaseLives();
+            turtleComboTimer -= Time.deltaTime;
+            if (turtleComboTimer < 0)
+            {
+                playerKillingByTurtleCombo = false;
+                killedByTurtleEnemies = 0;
+            }
         }
-        coinsText.text = string.Format(" X{0}", coins.ToString("D2"));
     }
-
-    public void SetLoadingUIScreen(bool value)
-    {
-        loadingUI.SetActive(value);
-    }
-
-    public void WriteCurrentTime(int currentTime)
-    {
-        timeText.text = string.Format("time\n {0}", currentTime.ToString("D3"));
-    }
-
-    //private void Update()
-    //{
-    //    if (!SceneController.Instance.isDeathScreen())
-    //    {
-    //        timeText.text = "time\n" + time.ToString("D3");
-    //        currentWorldTextDeathScreen.enabled = false;
-    //        livesText.enabled = false;
-    //        marioSprite.enabled = false;
-    //    }
-    //    else
-    //    {
-    //        timeText.text = "time\n";
-    //        currentWorldTextDeathScreen.enabled = true;
-    //        livesText.enabled = true;
-    //        marioSprite.enabled = true;
-    //    }
-    //}
 }
