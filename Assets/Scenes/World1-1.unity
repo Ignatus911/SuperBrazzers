@@ -3502,6 +3502,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7710096173939127954}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &1143082610 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7710096174365778035, guid: c773970e7d0cdae48960a4569696c340,
+    type: 3}
+  m_PrefabInstance: {fileID: 7710096173939127954}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1146909763
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8798,6 +8804,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4145251399700909544, guid: c773970e7d0cdae48960a4569696c340,
+        type: 3}
+      propertyPath: canvasRectTransform
+      value: 
+      objectReference: {fileID: 1143082610}
     - target: {fileID: 7710096174365778034, guid: c773970e7d0cdae48960a4569696c340,
         type: 3}
       propertyPath: m_Name

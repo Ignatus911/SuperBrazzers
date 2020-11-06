@@ -13,7 +13,8 @@ public class ScoreController : MonoBehaviour
     private float turtleComboTimer = 0;
     private int killedByPlayerEnemies = 0;
     private int killedByTurtleEnemies = 0;
-
+    private string playerTag = "Player";
+    private string turtleTag = "Turtle";
     private bool playerKillingCombo;
     private bool playerKillingByTurtleCombo;
 
@@ -37,16 +38,16 @@ public class ScoreController : MonoBehaviour
         UIController.Instance.ShowScore(score);
     }
 
-    public void AddScore(int value, bool killByPlayer, bool killByTurtle)
+    public void AddScore(int value, string hitter, Transform objectPositionInWorldSpace)
     {
-        if (killByPlayer)
+        if (hitter == playerTag )
         {
             playerComboTimer = 1;
             playerKillingCombo = true;
             killedByPlayerEnemies++;
             value = value * (int)Mathf.Pow(2, killedByPlayerEnemies - 1);// при убийстве нескольких врагов подряд прогрессия 2 в степени убийств
         }
-        if (killByTurtle)
+        if (hitter == turtleTag)
         {
             turtleComboTimer = 2;
             playerKillingByTurtleCombo = true;
@@ -54,7 +55,7 @@ public class ScoreController : MonoBehaviour
             value = value + 300 * (killedByTurtleEnemies-1);// 500 за первого, на 300 больше за каждого последующего 
         }
         score += value;
-        pointsSpawner.SpawnPoints(value);
+        pointsSpawner.SpawnPoints(value, objectPositionInWorldSpace);
         UIController.Instance.ShowScore(score);
     }
 
