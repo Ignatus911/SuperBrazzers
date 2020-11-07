@@ -8809,6 +8809,11 @@ PrefabInstance:
       propertyPath: canvasRectTransform
       value: 
       objectReference: {fileID: 1143082610}
+    - target: {fileID: 4145251399700909544, guid: c773970e7d0cdae48960a4569696c340,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1560550198}
     - target: {fileID: 7710096174365778034, guid: c773970e7d0cdae48960a4569696c340,
         type: 3}
       propertyPath: m_Name

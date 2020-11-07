@@ -29,7 +29,7 @@ public class PointsSpawner : MonoBehaviour
         rectTransform.localPosition = proportionalPosition - uiOffset;
         Debug.Log("result localposition = " + rectTransform.localPosition.x + "  " + rectTransform.localPosition.y);
         //
-        spawnedText.GetComponent<Text>().text = points.ToString();
+        spawnedText.GetComponentInChildren<Text>().text = points.ToString();
         spawnedText.GetComponent<RectTransform>().position = rectTransform.localPosition;
         var textOnScreen = Instantiate(spawnedText, canvasRectTransform);
         //textOnScreen.GetComponent<AnimatedText>().SetPosition(rectTransform.localPosition);
