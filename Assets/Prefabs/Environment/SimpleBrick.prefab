@@ -440,6 +440,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyClip: {fileID: 8300000, guid: 700f204274b92a544863bdfd2d40e944, type: 3}
+  headCheker:
+    CheckerSize: 0
+    Mask:
+      serializedVersion: 2
+      m_Bits: 100151
+    Checker: {fileID: 490891250}
 --- !u!114 &6377908385688782436
 MonoBehaviour:
   m_ObjectHideFlags: 0

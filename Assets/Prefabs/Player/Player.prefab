@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 1841571294}
   m_Layer: 11
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -220,7 +220,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03, y: -0.3}
+  m_Offset: {x: -0.030000001, y: -0.5019194}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -231,7 +231,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.58}
+  m_Size: {x: 0.8, y: 0.98}
   m_EdgeRadius: 0
 --- !u!50 &721853409
 Rigidbody2D:
@@ -261,7 +261,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3844921908557798372}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 6b483edca7886634987f3ad72e38aae9, type: 2}
   m_IsTrigger: 0
@@ -323,7 +323,7 @@ MonoBehaviour:
     - ElementName: Stop
       LittleClip: {fileID: 7400000, guid: aa421bbf7f82bf547b7cd4a24015f240, type: 2}
       BigClip: {fileID: 7400000, guid: c4727624d6ee4b147b43c449db41e7d8, type: 2}
-      ClipValue: 4
+      ClipValue: 2
     - ElementName: BecomeBig
       LittleClip: {fileID: 7400000, guid: 67d8bd99b4ed87c4dac4b818e41cb936, type: 2}
       BigClip: {fileID: 7400000, guid: 67d8bd99b4ed87c4dac4b818e41cb936, type: 2}
@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b70906636e0b1e45a0384e37b2b83d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStatus: {fileID: 0}
+  playerStatus: {fileID: 1841571291}
 --- !u!114 &3986871713939785255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,13 +389,14 @@ MonoBehaviour:
       m_Bits: 768
     Checker: {fileID: 672741616}
   headCheker:
-    CheckerSize: 0.7
+    CheckerSize: 0.5
     Mask:
       serializedVersion: 2
       m_Bits: 768
     Checker: {fileID: 1695396876}
   ySpeed: 10
   jumpClip: {fileID: 8300000, guid: c869ac7bec39f4540b7ab5ea624c767a, type: 3}
+  jumpFromEnemy: 10.7
   jumpTime: 0.38
 --- !u!114 &1841571281
 MonoBehaviour:
@@ -440,12 +441,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smallPlayerCollider:
     UpHitCheckerPosition: 0.055
-    offset: {x: -0.03, y: -0.3}
-    size: {x: 0.8, y: 0.58}
+    offset: {x: -0.03, y: -0.5}
+    size: {x: 0.8, y: 0.98}
   bigPlayerCollider:
     UpHitCheckerPosition: 1
-    offset: {x: -0.03, y: 0.2}
-    size: {x: 0.8, y: 1.5}
+    offset: {x: -0.03, y: 0}
+    size: {x: 0.8, y: 1.93}
   UpHitCheckerPosition: {fileID: 1695396876}
 --- !u!114 &1841571294
 MonoBehaviour:

@@ -39,23 +39,7 @@ public class Gumba : MonoBehaviour, IEnemy, IBlockPushable
         AnimationClip animation;
         IsAlife = false;
         Destroy(deatPoint);
-
-        //switch (hitter.tag)
-        //{
-        //    case ("Turtle"):
-        //        animation = kickedUpAnimation;
-        //        ScoreController.Instance.AddScore(scoreByTurtleKilling, false, true);
-        //        break;
-        //    case ("Player"):
-        //        hitter.GetComponent<PlayerJumpAspect>().BounceOnEnemy();
-        //        animation = smashedAnimation;
-        //        ScoreController.Instance.AddScore(scoreByPlayerKilling, true, false);
-        //        break;
-        //    default:
-        //        animation = kickedUpAnimation;
-        //        ScoreController.Instance.AddScore(scoreByPlayerKilling, true, false);
-        //        break;
-        //}
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         if (hitter.tag == playerTag)
         {
             hitter.GetComponent<PlayerJumpAspect>().BounceOnEnemy();
