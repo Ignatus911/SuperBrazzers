@@ -6,7 +6,8 @@ public class PointsSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject spawnedText;
     [SerializeField] private RectTransform canvasRectTransform;
-    [SerializeField] public Camera mainCamera;
+    [SerializeField] private GameObject mainCamera;
+    private Camera myCamera;
     private Canvas myCanvas;
 
 
@@ -14,6 +15,7 @@ public class PointsSpawner : MonoBehaviour
 
     {
         myCanvas = GetComponent<Canvas>();
+        myCamera = mainCamera.GetComponent<Camera>();
     }
 
     public void SpawnPoints(int points, Transform positionInWorldSpace)
@@ -30,7 +32,9 @@ public class PointsSpawner : MonoBehaviour
 
     private GameObject InstantiateTextOnCanvas(Transform positionInWorldSpace)
     {
-        Vector2 viewportPosition = mainCamera.WorldToViewportPoint(positionInWorldSpace.position);
+        if (myCamera == null)
+            myCamera = FindObjectOfType<Camera>();
+        Vector2 viewportPosition = myCamera.WorldToViewportPoint(positionInWorldSpace.position);
         Vector2 proportionalPosition = new Vector2(viewportPosition.x * canvasRectTransform.sizeDelta.x, viewportPosition.y * canvasRectTransform.sizeDelta.y);
         Vector2 positionOncanvas = (proportionalPosition * myCanvas.scaleFactor);
         var textOnScreen = Instantiate(spawnedText, canvasRectTransform);

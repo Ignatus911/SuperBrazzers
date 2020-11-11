@@ -382,8 +382,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 5278284309573154519}
+  ySpeed: 10.5
   groundCheker:
-    CheckerSize: 0.83
+    CheckerSize: 0.79
     Mask:
       serializedVersion: 2
       m_Bits: 768
@@ -394,7 +395,6 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 768
     Checker: {fileID: 1695396876}
-  ySpeed: 10
   jumpClip: {fileID: 8300000, guid: c869ac7bec39f4540b7ab5ea624c767a, type: 3}
   jumpFromEnemy: 10.7
   jumpTime: 0.38

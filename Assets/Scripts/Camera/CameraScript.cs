@@ -3,7 +3,7 @@
 public class CameraScript : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    [SerializeField] private InputControl input;
+    private InputControl input;
     [SerializeField] private float deltaScroll;
     [SerializeField] private float distanceToCamera = 4;
     private float xCamera;
@@ -11,6 +11,11 @@ public class CameraScript : MonoBehaviour
     private float xPlayerPreviousFrame;
     private float xTarget;
 
+
+    private void Awake()
+    {
+        input = player.GetComponent<InputControl>();
+    }
     void Update()
     {
         xPlayer = player.transform.position.x;

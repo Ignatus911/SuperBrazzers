@@ -7,9 +7,10 @@ public class PlayerJumpAspect : MonoBehaviour
 
     private Rigidbody2D body;
     [SerializeField] private InputControl input;
+    [SerializeField] private PlayerDirectionAspect playerDirectionAspect;
+    [SerializeField] private float ySpeed = 2;
     [SerializeField] private JumpChecker groundCheker;
     [SerializeField] private JumpChecker headCheker;
-    [SerializeField] private float ySpeed = 2;
     [SerializeField] private AudioClip jumpClip;
     [SerializeField, Range(0.5f,30f)] private float jumpFromEnemy = 2f;
 
@@ -21,6 +22,7 @@ public class PlayerJumpAspect : MonoBehaviour
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        playerDirectionAspect = GetComponent<PlayerDirectionAspect>();
     }
 
     private bool isAbleJump;
@@ -73,12 +75,18 @@ public class PlayerJumpAspect : MonoBehaviour
             if (currentJumpTime <= 0)
                 isAbleJump = false;
         }
+
+        if (playerDirectionAspect.IsLookRight)
+            groundCheker.Checker.localPosition = new Vector3(-groundCheker.offsetChecker, -1, 0);
+        else
+            groundCheker.Checker.localPosition = new Vector3(groundCheker.offsetChecker, -1, 0);
     }
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(headCheker.Checker.transform.position, headCheker.CheckerSize);
+        Gizmos.DrawCube(groundCheker.Checker.transform.position, new Vector3(groundCheker.CheckerSize,0.1f,0.1f));
     }
 }
 
@@ -88,4 +96,5 @@ public class JumpChecker
     public float CheckerSize;
     public LayerMask Mask;
     public Transform Checker;
+    public float offsetChecker;
 }

@@ -649,7 +649,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd831a4fb3ac714bacec33264fd7c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnedText: {fileID: 8077394794090085662, guid: c444d99e2551ec34786966bc8d3f424a,
+  spawnedText: {fileID: 3338262202599685041, guid: c444d99e2551ec34786966bc8d3f424a,
+    type: 3}
+  canvasRectTransform: {fileID: 7710096174365778035}
+  mainCamera: {fileID: 4014829610006603892, guid: c3fc94ae3def80f4b93985ae93e9f6fe,
     type: 3}
 --- !u!1 &7710096174611288684
 GameObject:
