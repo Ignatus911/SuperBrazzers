@@ -13,16 +13,20 @@ public class PlayerCollisionController : MonoBehaviour
             bonusComponent.Use(gameObject);
             return;
         }
-        if (playerStatusController.IsInvincible)
+        if (playerStatusController.IsUntouchable)
             return;
         var enemyComponent = other.gameObject.GetComponentInParent<IEnemy>();
         if (enemyComponent != null)
         {
-            var deathPoint = other.gameObject.GetComponent<Transform>();
-            float enemyDeathPoint = deathPoint.position.y;
-            float playerFeetPosition = PlayerGroundController.position.y;
-            if (playerFeetPosition >= enemyDeathPoint) { enemyComponent.Hit(gameObject); }
-            else playerStatusController.Hit();
+            if (!playerStatusController.IsSuper)
+            {
+                var deathPoint = other.gameObject.GetComponent<Transform>();
+                float enemyDeathPoint = deathPoint.position.y;
+                float playerFeetPosition = PlayerGroundController.position.y;
+                if (playerFeetPosition >= enemyDeathPoint) { enemyComponent.Hit(gameObject); }
+                else playerStatusController.Hit();
+            }
+            else enemyComponent.DieFromSuperPlayer(gameObject);
         }
     }
 }

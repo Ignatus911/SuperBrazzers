@@ -17,6 +17,7 @@ public class Gumba : MonoBehaviour, IEnemy, IBlockPushable
     private string playerTag = "Player";
     private string turtleTag = "Turtle";
     private bool deathFromPushedBlock = false;
+
     private void Awake()
     {
         directionAspect.LookAt(isLookRight);
@@ -40,10 +41,15 @@ public class Gumba : MonoBehaviour, IEnemy, IBlockPushable
         IsAlife = false;
         Destroy(deatPoint);
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-        if (hitter.tag == playerTag)
+        if (hitter.GetComponent<PlayerStatusController>() != null)
         {
-            hitter.GetComponent<PlayerJumpAspect>().BounceOnEnemy();
-            animation = smashedAnimation;
+            if (hitter.GetComponent<PlayerStatusController>().IsSuper)
+                animation = kickedUpAnimation;
+            else
+            {
+                hitter.GetComponent<PlayerJumpAspect>().BounceOnEnemy();
+                animation = smashedAnimation;
+            }
         }
         else
             animation = kickedUpAnimation;
@@ -55,6 +61,11 @@ public class Gumba : MonoBehaviour, IEnemy, IBlockPushable
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void DieFromSuperPlayer(GameObject hitter)
+    {
+        Hit(hitter);
     }
 
     public void Push(GameObject pusher)

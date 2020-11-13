@@ -2,7 +2,6 @@
 
 public class MovementAI : MonoBehaviour
 {
-    [SerializeField]
     private float xSpeed;
 
     [SerializeField] private EnemyMovementAspect movementAspect;

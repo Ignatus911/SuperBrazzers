@@ -2,6 +2,7 @@
 {
     Small,
     Big,
-    Super,
+    SuperBig,
+    SuperSmall,
     Dead
 }

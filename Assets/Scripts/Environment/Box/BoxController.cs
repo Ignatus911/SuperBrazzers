@@ -25,8 +25,13 @@ public class BoxController : MonoBehaviour, IHeadHitting
                     case PlayerStatus.Small:
                         currentState = boxJump;
                         break;
-                    case PlayerStatus.Super:
+                    case PlayerStatus.SuperSmall:
+                        currentState = boxJump;
+                        break;
                     case PlayerStatus.Big:
+                        currentState = boxDestroy;
+                        break;
+                    case PlayerStatus.SuperBig:
                         currentState = boxDestroy;
                         break;
                 }

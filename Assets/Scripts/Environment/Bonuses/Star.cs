@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Star : MonoBehaviour
+public class Star : BonusCommonLogic
 {
     private Rigidbody2D body;
     [SerializeField] private Animator starAnimator;
@@ -43,8 +43,18 @@ public class Star : MonoBehaviour
     {
         body.velocity =  new Vector2(body.velocity.x, bounceForce );
     }
-
+    public override void UseImplementation(GameObject user)
+    {
+        if (!isMoving)
+            return;
+        isAlife = false;
+        user.GetComponent<PlayerStatusController>().BecomeSuper();
+        AudioManager.Instance.PlayMusic(invictableMusic);
+        ScoreController.Instance.AddScore(1000);
+        Destroy(gameObject);
+    }
 }
+
 [Serializable]
 public class GroundChecker
 {

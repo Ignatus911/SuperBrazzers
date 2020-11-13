@@ -6,13 +6,13 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
-    [SerializeField] AudioSource musicSource;
-    [SerializeField] AudioSource soundSource;
-    [SerializeField] AudioClip mainTheme;
-    [SerializeField] AudioClip pauseSound;
-    [SerializeField, Range(0.2f, 1f)] float pauseSoundTime;
-    [SerializeField] List<AudioClip> musics;
-    [SerializeField] List<AudioClip> sounds;
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioSource soundSource;
+    [SerializeField] private AudioClip mainTheme;
+    [SerializeField] private AudioClip pauseSound;
+    [SerializeField, Range(0.2f, 1f)] private float pauseSoundTime;
+    [SerializeField] private List<AudioClip> musics;
+    [SerializeField] private List<AudioClip> sounds;
 
 
     private void Awake()
@@ -75,5 +75,10 @@ public class AudioManager : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void PlayMainTheme()
+    {
+        PlayMusic(mainTheme);
     }
 }

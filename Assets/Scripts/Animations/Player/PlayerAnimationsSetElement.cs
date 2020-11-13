@@ -11,7 +11,7 @@ public class PlayerAnimationsSet
         foreach (var clipSet in Clips)
         {
             if (clipSet.ClipValue == clipState)
-                return isBig ? clipSet.BigClip : clipSet.LittleClip;
+            return isBig ? clipSet.BigClip : clipSet.LittleClip;
         }
         return null;
     }

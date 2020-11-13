@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class PlayerStatusController : MonoBehaviour
 {
-    public bool IsInvincible { get; private set; }
+    public bool IsUntouchable { get; private set; }
+    public bool IsSuper { get; private set; }
     public PlayerStatus Status { get; private set; }
     public static Action<PlayerStatus> OnChangeStatus;
     [SerializeField] private AudioClip deathTheme;
     [SerializeField] private AudioClip becomeSmallClip;
-
     [SerializeField] private PlayerSizeController playerSizeAspet;
+    [SerializeField] private float superFormTime = 12f;
+    [SerializeField] private float untouchableTime = 2f;
 
     public void BecomeBig()
     {
@@ -24,11 +26,29 @@ public class PlayerStatusController : MonoBehaviour
 
     private void BecomeSmall()
     {
-        StartCoroutine(InvincibleTime(2f));
+        StartCoroutine(InvincibleTime(untouchableTime));
         AudioManager.Instance.PlaySound(becomeSmallClip);
         Status = PlayerStatus.Small;
         OnChangeStatus.Invoke(Status);
         playerSizeAspet.setSmallCollider();
+    }
+
+    public void BecomeSuper()
+    {
+        var lastStatus = Status;
+        if (Status == PlayerStatus.Small)
+        {
+            Status = PlayerStatus.SuperSmall;
+            OnChangeStatus.Invoke(Status);
+            StartCoroutine(TimeForSuperForm(superFormTime, lastStatus));
+        }else
+        {
+            Status = PlayerStatus.SuperBig;
+            OnChangeStatus.Invoke(Status);
+            StartCoroutine(TimeForSuperForm(superFormTime, lastStatus));
+        }
+
+        playerSizeAspet.setBigCollider();
     }
 
     public void BecomeDead()
@@ -57,8 +77,17 @@ public class PlayerStatusController : MonoBehaviour
 
     IEnumerator InvincibleTime(float invicibleTime)
     {
-        IsInvincible = true;
+        IsUntouchable = true;
         yield return new WaitForSeconds(invicibleTime);
-        IsInvincible = false;
+        IsUntouchable = false;
+    }
+
+    IEnumerator TimeForSuperForm(float superFormTime, PlayerStatus lastStatus)
+    {
+        IsSuper = true;
+        yield return new WaitForSeconds(superFormTime);
+        Status = lastStatus;
+        AudioManager.Instance.PlayMainTheme();
+        IsSuper = false;
     }
 }
