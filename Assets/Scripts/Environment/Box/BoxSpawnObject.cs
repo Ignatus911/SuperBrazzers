@@ -6,13 +6,14 @@ public class BoxSpawnObject : MonoBehaviour, BoxState
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private Sprite deadBlockSprite;
     [SerializeField] private float lifeTime;
+    [SerializeField] private bool enableLastHit;
     private BoxSpawnCoinState state = BoxSpawnCoinState.Default;
-    private float destroyTime;
 
     [SerializeField] private BoxBonusType bonusType;
 
     [SerializeField] private GameObject coinPrefab;
     [SerializeField] private GameObject mushromPrefab;
+    [SerializeField] private GameObject starPrefab;
     [SerializeField] private Transform spawnTransform;
 
     private void Awake()
@@ -32,6 +33,11 @@ public class BoxSpawnObject : MonoBehaviour, BoxState
             case BoxSpawnCoinState.UnderPressing:
                 SpawnElement();
                 return;
+            case BoxSpawnCoinState.WaitingForLastHit:
+                SpawnElement();
+                enableLastHit = false;
+                state = BoxSpawnCoinState.UnderPressing;
+                return;
             case BoxSpawnCoinState.Dead:
                 return;
         }
@@ -43,8 +49,12 @@ public class BoxSpawnObject : MonoBehaviour, BoxState
             return;
         if (lifeTime < Time.time)
         {
-            state = BoxSpawnCoinState.Dead;
-            sprite.sprite = deadBlockSprite;
+            if (!enableLastHit)
+            {
+                state = BoxSpawnCoinState.Dead;
+                sprite.sprite = deadBlockSprite;
+            }
+            else state = BoxSpawnCoinState.WaitingForLastHit;
         }
     }
 
@@ -60,6 +70,9 @@ public class BoxSpawnObject : MonoBehaviour, BoxState
                 break;
             case BoxBonusType.Mushroom:
                 spawnObject = mushromPrefab;
+                break;
+            case BoxBonusType.Star:
+                spawnObject = starPrefab;
                 break;
         }
         Instantiate(spawnObject, spawnTransform.position, new Quaternion(), spawnTransform);

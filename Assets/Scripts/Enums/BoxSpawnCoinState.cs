@@ -2,5 +2,6 @@
 {
     Default,
     UnderPressing,
+    WaitingForLastHit,
     Dead
 }

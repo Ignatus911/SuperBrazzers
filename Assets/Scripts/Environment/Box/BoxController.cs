@@ -7,7 +7,6 @@ public class BoxController : MonoBehaviour, IHeadHitting
     [SerializeField] private BoxDestroy boxDestroy;
     [SerializeField] private BoxJump boxJump;
     [SerializeField] private BoxSpawnObject _boxObject;
-    [SerializeField] private LayerMask playerMask;
     private BoxState currentState;
     private bool freeze;
 
@@ -49,7 +48,7 @@ public class BoxController : MonoBehaviour, IHeadHitting
 
     IEnumerator DontReact()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
         freeze = false;
     }
 }

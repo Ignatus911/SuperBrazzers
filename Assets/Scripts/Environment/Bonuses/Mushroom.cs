@@ -8,8 +8,7 @@ public class Mushroom: BonusCommonLogic, IBlockPushable
     [SerializeField] private AudioClip mushroomClip;
     [SerializeField] private AudioClip PowerupClip;
 
-    [SerializeField]
-    private EnemyMovementAspect movementLogic;
+    [SerializeField] private EnemyMovementAspect movementLogic;
     [SerializeField] private float speed;
 
     private void Awake()
@@ -36,9 +35,6 @@ public class Mushroom: BonusCommonLogic, IBlockPushable
         Destroy(gameObject);
     }
 
-    /// <summary>
-    /// Вызывается в анимации, позволяет грибу двигаться
-    /// </summary>
     [UsedImplicitly]
     public void AllowToMove()
     {

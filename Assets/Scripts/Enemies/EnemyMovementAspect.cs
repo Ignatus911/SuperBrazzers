@@ -13,6 +13,8 @@ public class EnemyMovementAspect : MonoBehaviour
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        if (GetComponent<IEnemy>() == null)
+            isAbleToMove = true;
     }
 
     public void Move(float speed)

@@ -22,6 +22,7 @@ public class EnemyDirectionAspect : MonoBehaviour
         IsLookRight = right;
         if (sprite != null)
             sprite.flipX = !IsLookRight;
-        collisionChecker.localPosition = new Vector3(Mathf.Abs(collisionChecker.localPosition.x) * (IsLookRight ? 1 : -1), collisionChecker.localPosition.y, collisionChecker.localPosition.z);
+        if(collisionChecker != null)
+            collisionChecker.localPosition = new Vector3(Mathf.Abs(collisionChecker.localPosition.x) * (IsLookRight ? 1 : -1), collisionChecker.localPosition.y, collisionChecker.localPosition.z);
     }
 }
