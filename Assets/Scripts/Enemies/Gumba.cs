@@ -33,13 +33,14 @@ public class Gumba : MonoBehaviour, IEnemy, IBlockPushable
         }
     }
 
-    public void Hit(GameObject hitter)
+    public void Hit(GameObject hitter, bool hitterDirection)
     {
         if (!IsAlife)
             return;
         AnimationClip animation;
         IsAlife = false;
         Destroy(deatPoint);
+        Destroy(GetComponent<CircleCollider2D>());
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         if (hitter.GetComponent<PlayerStatusController>() != null)
         {
@@ -53,6 +54,10 @@ public class Gumba : MonoBehaviour, IEnemy, IBlockPushable
         }
         else
             animation = kickedUpAnimation;
+        if (!hitterDirection)
+        {
+            gameObject.transform.localScale = new Vector3(-1, 1, 1);
+        }
         ScoreController.Instance.AddScore(scoreByPlayerKilling, hitter.tag, transform);
         GetComponent<Animator>().Play(animation.name);
         AudioManager.Instance.PlaySound(dieClip);
@@ -63,14 +68,14 @@ public class Gumba : MonoBehaviour, IEnemy, IBlockPushable
         Destroy(gameObject);
     }
 
-    public void DieFromSuperPlayer(GameObject hitter)
+    public void DieFromSuperPlayer(GameObject hitter, bool hitterDirection)
     {
-        Hit(hitter);
+        Hit(hitter, hitterDirection);
     }
 
-    public void Push(GameObject pusher)
+    public void Push(GameObject pusher, bool hitterDirection)
     {
         deathFromPushedBlock = true;
-        Hit(pusher);
+        Hit(pusher, hitterDirection);
     }
 }

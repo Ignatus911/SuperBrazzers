@@ -1,4 +1,5 @@
 ﻿using JetBrains.Annotations;
+using System.Collections;
 using UnityEngine;
 
 public class Mushroom: BonusCommonLogic, IBlockPushable
@@ -7,7 +8,6 @@ public class Mushroom: BonusCommonLogic, IBlockPushable
     private bool isMoving = false;
     [SerializeField] private AudioClip mushroomClip;
     [SerializeField] private AudioClip PowerupClip;
-
     [SerializeField] private EnemyMovementAspect movementLogic;
     [SerializeField] private float speed;
 
@@ -31,7 +31,7 @@ public class Mushroom: BonusCommonLogic, IBlockPushable
         isAlife = false;
         user.GetComponent<PlayerStatusController>().BecomeBig();
         AudioManager.Instance.PlaySound(PowerupClip);
-        ScoreController.Instance.AddScore(1000);
+        ScoreController.Instance.AddScore(1000,transform);
         Destroy(gameObject);
     }
 
@@ -41,7 +41,7 @@ public class Mushroom: BonusCommonLogic, IBlockPushable
         isMoving = true;
     }
 
-    public void Push(GameObject pusher)
+    public void Push(GameObject pusher, bool hitterDirection)
     {
         GetComponent<EnemyDirectionAspect>()?.Rotate();
     }

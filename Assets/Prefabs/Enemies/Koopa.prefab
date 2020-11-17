@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status: {fileID: 8929172764871064271}
+  direction: {fileID: 1583353565517064585}
 --- !u!114 &6097953783303538283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,15 +205,16 @@ MonoBehaviour:
   isLookRight: 0
   directionAspect: {fileID: 1583353565517064585}
   movementAspect: {fileID: 1583353565517064591}
-  player: {fileID: 3844921908557798372, guid: 5730e6958d2f1fa48b5f6f7c691cdf1e, type: 3}
+  player: {fileID: 0}
   koopaSpeed: 3
   projectileKoopaSpeed: 10
   status: {fileID: 8929172764871064271}
   deatPoint: {fileID: 1969798714803130518}
-  dieClip: {fileID: 0}
+  dieSound: {fileID: 8300000, guid: c3545bb651a0a3f449855f264cf9630c, type: 3}
+  dieAnimation: {fileID: 7400000, guid: 6e9442d87d89867448000a21feaf00ba, type: 2}
+  selfAnimator: {fileID: 1969798715592255694}
   getInShellScore: 400
   projectileScore: 1000
-  dieAnimation: {fileID: 0}
 --- !u!58 &1089525105584652316
 CircleCollider2D:
   m_ObjectHideFlags: 0

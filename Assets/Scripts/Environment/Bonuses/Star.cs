@@ -50,7 +50,7 @@ public class Star : BonusCommonLogic
         isAlife = false;
         user.GetComponent<PlayerStatusController>().BecomeSuper();
         AudioManager.Instance.PlayMusic(invictableMusic);
-        ScoreController.Instance.AddScore(1000);
+        ScoreController.Instance.AddScore(1000,transform);
         Destroy(gameObject);
     }
 }

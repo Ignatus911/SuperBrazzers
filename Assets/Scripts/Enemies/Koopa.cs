@@ -14,11 +14,11 @@ public class Koopa : MonoBehaviour, IEnemy, IBlockPushable
     [SerializeField] private float projectileKoopaSpeed;
     [SerializeField] private KoopaStatusController status;
     [SerializeField] private GameObject deatPoint;
-    [SerializeField] private AudioClip dieClip;
+    [SerializeField] private AudioClip dieSound;
+    [SerializeField] private AnimationClip dieAnimation;
+    [SerializeField] private Animator selfAnimator;
     [SerializeField] private int getInShellScore = 400;
     [SerializeField] private int projectileScore = 1000;
-    [SerializeField] private AnimationClip dieAnimation;
-
 
     private void Awake()
     {
@@ -49,7 +49,7 @@ public class Koopa : MonoBehaviour, IEnemy, IBlockPushable
         }
     }
 
-    public void Hit(GameObject hitter)
+    public void Hit(GameObject hitter, bool hitterDirection)
     {
         var score = getInShellScore;
         if (!IsAlife)
@@ -73,11 +73,8 @@ public class Koopa : MonoBehaviour, IEnemy, IBlockPushable
                     break;
             }
             hitter.GetComponent<PlayerJumpAspect>().BounceOnEnemy();
-
         }
-        else
-            DieFromSuperPlayer(hitter);
-        ScoreController.Instance.AddScore(score);
+        ScoreController.Instance.AddScore(score, transform);
     }
 
     private void CheckDirection()
@@ -91,13 +88,19 @@ public class Koopa : MonoBehaviour, IEnemy, IBlockPushable
         Destroy(gameObject);
     }
 
-    public void DieFromSuperPlayer(GameObject hitter)
+    public void DieFromSuperPlayer(GameObject hitter, bool hitterDirection)
     {
-        AudioManager.Instance.PlaySound(dieClip);//kickup score add
+        IsAlife = false;
+        if (!hitterDirection)
+            gameObject.transform.localScale = new Vector3(-1, 1, 1);
+        selfAnimator.Play(dieAnimation.name);
+        AudioManager.Instance.PlaySound(dieSound);
+        var score = getInShellScore;
+        ScoreController.Instance.AddScore(score, transform);
     }
 
-    public void Push(GameObject pusher)
+    public void Push(GameObject pusher, bool hitterDirection)
     {
-        DieFromSuperPlayer(pusher);
+        DieFromSuperPlayer(pusher, hitterDirection);
     }
 }

@@ -5,8 +5,8 @@ public class BoxJump : MonoBehaviour, BoxState
     private Animator animator;
 
     [SerializeField] private AudioClip jumpClip;
-
     [SerializeField] private JumpChecker headCheker;
+    [SerializeField] private GameObject player;
 
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class BoxJump : MonoBehaviour, BoxState
         if (headCollisionTarget != null)
         {
             var pushable = headCollisionTarget.GetComponent<IBlockPushable>();
-            pushable?.Push(gameObject);
+            pushable?.Push(gameObject, player.GetComponent<PlayerDirectionAspect>().IsLookRight);
         }
     }
 }

@@ -2,5 +2,5 @@
 
 public interface IBlockPushable
 {
-    void Push(GameObject pusher);
+    void Push(GameObject pusher, bool hitterDirection);
 }

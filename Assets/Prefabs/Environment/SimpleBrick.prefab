@@ -446,6 +446,8 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 100151
     Checker: {fileID: 490891250}
+    offsetChecker: 0
+  player: {fileID: 0}
 --- !u!114 &6377908385688782436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,6 +467,8 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 100151
     Checker: {fileID: 490891250}
+    offsetChecker: 0
+  player: {fileID: 0}
 --- !u!114 &4162143860979487934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,9 +485,6 @@ MonoBehaviour:
   boxDestroy: {fileID: 8100761951763890094}
   boxJump: {fileID: 6377908385688782436}
   _boxObject: {fileID: 0}
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 2048
 --- !u!95 &4141725835573868852
 Animator:
   serializedVersion: 3

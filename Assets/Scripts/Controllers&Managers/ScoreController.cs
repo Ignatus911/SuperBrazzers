@@ -32,10 +32,17 @@ public class ScoreController : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
     }
-        public void AddScore(int value)
+    public void AddScore(int value)
     {
         score += value;
         UIController.Instance.ShowScore(score);
+    }
+
+    public void AddScore(int value, Transform objectPositionInWorldSpace)
+    {
+        score += value;
+        UIController.Instance.ShowScore(score);
+        pointsSpawner.SpawnPoints(value, objectPositionInWorldSpace);
     }
 
     public void AddScore(int value, string hitter, Transform objectPositionInWorldSpace)

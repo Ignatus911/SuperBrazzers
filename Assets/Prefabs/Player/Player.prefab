@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 1841571281}
   - component: {fileID: 1841571291}
   - component: {fileID: 1841571293}
+  - component: {fileID: 6313507857993389117}
   - component: {fileID: 1841571294}
   m_Layer: 11
   m_Name: Player
@@ -220,7 +221,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.030000001, y: -0.5019194}
+  m_Offset: {x: 0, y: -0.5019194}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -382,19 +383,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 5278284309573154519}
+  playerDirectionAspect: {fileID: 1921091371923260214}
   ySpeed: 10.5
   groundCheker:
-    CheckerSize: 0.79
+    CheckerSize: 0.77
     Mask:
       serializedVersion: 2
       m_Bits: 768
     Checker: {fileID: 672741616}
+    offsetChecker: 0.027
   headCheker:
     CheckerSize: 0.5
     Mask:
       serializedVersion: 2
       m_Bits: 768
     Checker: {fileID: 1695396876}
+    offsetChecker: 0
   jumpClip: {fileID: 8300000, guid: c869ac7bec39f4540b7ab5ea624c767a, type: 3}
   jumpFromEnemy: 10.7
   jumpTime: 0.38
@@ -412,6 +416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStatusController: {fileID: 1841571291}
   PlayerGroundController: {fileID: 672741616}
+  direction: {fileID: 1921091371923260214}
 --- !u!114 &1841571291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,6 +432,8 @@ MonoBehaviour:
   deathTheme: {fileID: 8300000, guid: ba925f1a08a38f64fb7e0224eaff3972, type: 3}
   becomeSmallClip: {fileID: 8300000, guid: 128ff7db1250b3b4bb362d7a451b06b9, type: 3}
   playerSizeAspet: {fileID: 1841571293}
+  superFormTime: 12
+  untouchableTime: 2
 --- !u!114 &1841571293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,13 +448,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smallPlayerCollider:
     UpHitCheckerPosition: 0.055
-    offset: {x: -0.03, y: -0.5}
+    offset: {x: 0, y: -0.5}
     size: {x: 0.8, y: 0.98}
   bigPlayerCollider:
     UpHitCheckerPosition: 1
-    offset: {x: -0.03, y: 0}
+    offset: {x: 0, y: 0}
     size: {x: 0.8, y: 1.93}
   UpHitCheckerPosition: {fileID: 1695396876}
+--- !u!114 &6313507857993389117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3844921908557798372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8988ac9d90e667e4b91ad8deab990349, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 3844921907839630921}
 --- !u!114 &1841571294
 MonoBehaviour:
   m_ObjectHideFlags: 0

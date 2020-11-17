@@ -7,6 +7,7 @@ public class BoxDestroy : MonoBehaviour, BoxState
     private bool isAlife = true;
     [SerializeField] private AudioClip destroyClip;
     [SerializeField] private JumpChecker headCheker;
+    [SerializeField] private GameObject player;
 
     private void Awake()
     {
@@ -23,7 +24,7 @@ public class BoxDestroy : MonoBehaviour, BoxState
         if (headCollisionTarget != null)
         {
             var pushable = headCollisionTarget.GetComponent<IBlockPushable>();
-            pushable?.Push(gameObject);
+            pushable?.Push(gameObject, player.GetComponent<PlayerDirectionAspect>().IsLookRight);
         }
         AudioManager.Instance.PlaySound(destroyClip);
         StartCoroutine(BoxExistCoroutine());
